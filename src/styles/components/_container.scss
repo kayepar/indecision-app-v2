@@ -1,0 +1,15 @@
+.container {
+    margin: 0 auto;
+    max-width: 55rem;
+    padding: 0 $m-size;
+}
+
+.container--content {
+    padding: $ml-size $m-size;
+}
+
+@media (min-width: $desktop-breakpoint) {
+    .container--content {
+        padding: $xl-size $m-size;
+    }
+}

@@ -1,0 +1,26 @@
+.menu-icon {
+    color: $orange-color;
+
+    &:hover {
+        color: white;
+    }
+}
+
+.MuiIconButton-root {
+    &:hover {
+        // remove color change
+        background-color: rgba(240, 148, 60, 0) !important;
+    }
+}
+
+.MuiListItem-button {
+    &:hover {
+        // text-decoration: none;
+        background-color: rgba(240, 148, 60, 0.3) !important;
+    }
+}
+
+.menu-item {
+    // color: $orange-color !important;
+    font-size: 1.4rem !important;
+}

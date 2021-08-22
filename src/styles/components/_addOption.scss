@@ -1,0 +1,40 @@
+.add-option-container {
+    background: $green-color;
+    border-radius: $radius-size;
+    padding: $ml-size $m-size;
+}
+
+.add-option-error {
+    color: white;
+    font-style: italic;
+    margin: 0;
+    padding: 0 0 $m-size 0;
+}
+
+.add-option {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+.add-option__input {
+    background: $off-white-color;
+    border: none;
+    flex-grow: 1;
+    padding: $s-size;
+    margin: 0 0 $m-size 0;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+@media (min-width: $desktop-breakpoint) {
+    .add-option {
+        flex-direction: row;
+    }
+
+    .add-option__input {
+        margin: 0 $m-size 0 0;
+    }
+}

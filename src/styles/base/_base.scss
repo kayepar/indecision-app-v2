@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+$poppins-font: 'Poppins';
+
+html {
+    font-size: 52.5%;
+}
+
+body {
+    background: $cream-color;
+    font-family: $poppins-font;
+    font-size: $m-size;
+    color: $dark-grey;
+
+    &::-webkit-scrollbar {
+        /* width of the entire scrollbar */
+        width: 1.2rem;
+    }
+
+    &::-webkit-scrollbar-track {
+        /* color of the tracking area */
+        background: $off-white-color;
+        border-bottom-right-radius: $radius-size;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        /* color of the scroll thumb */
+        background-color: $orange-color;
+        /* roundness of the scroll thumb */
+        border-bottom-right-radius: $radius-size;
+        /* creates padding around scroll thumb */
+        border: 3px solid $orange-color;
+    }
+}
+
+button {
+    cursor: pointer;
+}
+
+button:disabled {
+    cursor: default;
+}
+
+@media (min-width: $desktop-breakpoint) {
+    html {
+        font-size: 62.5%;
+    }
+}

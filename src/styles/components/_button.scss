@@ -1,0 +1,56 @@
+.big-button {
+    background: $orange-color;
+    border: none;
+    border-radius: $radius-size;
+    color: white;
+    font-size: $l-size;
+    font-weight: bold;
+    padding: 2.2rem;
+    width: 100%;
+}
+
+.big-button:disabled {
+    opacity: 0.6;
+
+    &:hover {
+        background: $orange-color;
+    }
+}
+
+.big-button:hover {
+    background: darken($orange-color, 5%);
+}
+
+// small button
+.button {
+    background: $orange-color;
+    border: none;
+    border-radius: $radius-size;
+    color: white;
+    font-weight: 300;
+    padding: $s-size;
+
+    &:hover {
+        background: darken($orange-color, 10%);
+    }
+}
+
+.button--link {
+    background: none;
+    color: $orange-color;
+    padding: 0;
+
+    &:hover {
+        background: none;
+        color: darken($orange-color, 10%);
+    }
+
+    &:disabled {
+        opacity: 0.5;
+
+        &:hover {
+            background: none;
+            color: $orange-color;
+        }
+    }
+}

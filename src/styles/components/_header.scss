@@ -1,0 +1,17 @@
+.header {
+    background: $green-color;
+    color: white;
+    padding: $ml-size 0;
+}
+
+.header__title {
+    font-size: 3.8rem;
+    margin: 0;
+}
+
+.header__subtitle {
+    color: $orange-color;
+    font-size: $m-size;
+    font-weight: 400;
+    margin: 0;
+}
