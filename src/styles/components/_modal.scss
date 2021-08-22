@@ -19,7 +19,7 @@
 }
 
 .modal {
-    background: $cream-color;
+    background: $white;
     border: 1px solid lighten($dark-grey, 8%);
     border-radius: $radius-size;
     max-width: 40rem;
@@ -30,7 +30,7 @@
 }
 
 .modal__title {
-    background: $green-color;
+    background: $dark-purple;
     color: white;
     margin: 0 0 $l-size 0;
     padding: $m-size;

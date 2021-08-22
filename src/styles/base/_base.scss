@@ -7,7 +7,7 @@ html {
 }
 
 body {
-    background: $cream-color;
+    background: $white;
     font-family: $poppins-font;
     font-size: $m-size;
     color: $dark-grey;
@@ -25,11 +25,11 @@ body {
 
     &::-webkit-scrollbar-thumb {
         /* color of the scroll thumb */
-        background-color: $orange-color;
+        background-color: $turquoise;
         /* roundness of the scroll thumb */
         border-bottom-right-radius: $radius-size;
         /* creates padding around scroll thumb */
-        border: 3px solid $orange-color;
+        border: 3px solid $turquoise;
     }
 }
 
