@@ -9,7 +9,7 @@ html {
 }
 
 body {
-    background: $off-white;
+    background: $white;
     font-family: $raleway-font;
     font-size: $m-size;
     color: $dark-grey;
@@ -27,11 +27,11 @@ body {
 
     &::-webkit-scrollbar-thumb {
         /* color of the scroll thumb */
-        background-color: $turquoise;
+        background-color: $secondary-color;
         /* roundness of the scroll thumb */
         border-bottom-right-radius: $radius-size;
         /* creates padding around scroll thumb */
-        border: 3px solid $turquoise;
+        border: 3px solid $secondary-color;
     }
 }
 

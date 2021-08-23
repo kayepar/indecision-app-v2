@@ -3,17 +3,17 @@
 }
 
 .widget__message {
-    border: 1px solid lighten($dark-grey, 8%);
+    border: 1px solid lighten($accent-color, 8%);
     margin: 0;
     padding: $ml-size $m-size;
     text-align: center;
 }
 
 .widget-header {
-    background: $dark-purple;
+    background: $primary-color;
     border-top-left-radius: $radius-size;
     border-top-right-radius: $radius-size;
-    color: white;
+    color: $accent-color;
     display: flex;
     justify-content: space-between;
     padding: $xs-size 0 $xs-size $m-size;
@@ -40,9 +40,9 @@
 
     &::-webkit-scrollbar-thumb {
         /* color of the scroll thumb */
-        background-color: $turquoise;
+        background-color: $secondary-color;
         /* creates padding around scroll thumb */
-        border: 3px solid $turquoise;
+        border: 3px solid $secondary-color;
     }
 }
 

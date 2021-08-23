@@ -1,6 +1,6 @@
 .header {
-    background: $dark-purple;
-    color: white;
+    background: $primary-color;
+    color: $white;
     padding: $ml-size 0;
 }
 
@@ -10,7 +10,7 @@
 }
 
 .header__subtitle {
-    color: $turquoise;
+    color: $secondary-color;
     font-size: $m-size;
     font-weight: 400;
     margin: 0;

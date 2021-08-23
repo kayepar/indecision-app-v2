@@ -1,14 +1,19 @@
 // Colors
-$green-color: #314e52;
-$cream-color: #f7f6e7;
-$orange-color: #f2a154;
 $dark-grey: #393e46;
-
 $dark-purple: #272343;
 $turquoise: #bae8e8;
 $light-turquoise: #e3f6f5;
 $white: #fff;
 $off-white: #e7e6e1;
+
+$cream: #f6f4e6;
+$mustard: #fddb3a;
+$grey: #52575d;
+$darker-grey: #41444b;
+
+$primary-color: $darker-grey;
+$secondary-color: $mustard;
+$accent-color: $cream;
 
 // Spacing
 $xs-size: 0.5rem;

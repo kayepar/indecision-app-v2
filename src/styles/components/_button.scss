@@ -1,8 +1,8 @@
 .big-button {
-    background: $turquoise;
+    background: $secondary-color;
     border: none;
     border-radius: $radius-size;
-    color: white;
+    color: $white;
     font-size: $l-size;
     font-weight: bold;
     padding: 2.2rem;
@@ -13,36 +13,36 @@
     opacity: 0.6;
 
     &:hover {
-        background: $turquoise;
+        background: $secondary-color;
     }
 }
 
 .big-button:hover {
-    background: darken($turquoise, 5%);
+    background: darken($secondary-color, 5%);
 }
 
 // small button
 .button {
-    background: $turquoise;
+    background: $secondary-color;
     border: none;
     border-radius: $radius-size;
-    color: white;
+    color: $white;
     font-weight: 300;
     padding: $s-size;
 
     &:hover {
-        background: darken($turquoise, 10%);
+        background: darken($secondary-color, 10%);
     }
 }
 
 .button--link {
     background: none;
-    color: $turquoise;
+    color: $secondary-color;
     padding: 0;
 
     &:hover {
         background: none;
-        color: darken($turquoise, 10%);
+        color: darken($secondary-color, 10%);
     }
 
     &:disabled {
@@ -50,7 +50,7 @@
 
         &:hover {
             background: none;
-            color: $turquoise;
+            color: $secondary-color;
         }
     }
 }
