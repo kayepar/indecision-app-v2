@@ -1,14 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap');
 
 $poppins-font: 'Poppins';
+$raleway-font: 'Raleway';
 
 html {
     font-size: 52.5%;
 }
 
 body {
-    background: $white;
-    font-family: $poppins-font;
+    background: $off-white;
+    font-family: $raleway-font;
     font-size: $m-size;
     color: $dark-grey;
 
@@ -19,7 +21,7 @@ body {
 
     &::-webkit-scrollbar-track {
         /* color of the tracking area */
-        background: $off-white-color;
+        background: $off-white;
         border-bottom-right-radius: $radius-size;
     }
 
