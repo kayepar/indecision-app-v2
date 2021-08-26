@@ -5,6 +5,7 @@ import OptionsContext from '../context/optionsContext';
 import optionsReducer from '../reducers/optionsReducer';
 import PickedOptionContext from '../context/pickedOptionContext';
 import pickedOptionReducer from '../reducers/pickedOptionReducer';
+import OptionModal from './OptionModal';
 
 const IndecisionApp = () => {
     const defaultOptions = ['one', 'two', 'three'];
@@ -21,11 +22,9 @@ const IndecisionApp = () => {
                     <div>
                         <ActionButton />
                     </div>
+                    <OptionModal />
                 </div>
             </PickedOptionContext.Provider>
-            {
-                // <OptionModal selectedOption={selectedOption} handleClearSelectedOption={handleClearSelectedOption} />
-            }
         </OptionsContext.Provider>
     );
 };
