@@ -15,7 +15,7 @@ const ActionButton = () => {
 
     return (
         <>
-            <button id="big-button" className="big-button" onClick={handlePickOption}>
+            <button id="big-button" className="big-button" onClick={handlePickOption} disabled={options.length < 1}>
                 Choose for me
             </button>
         </>
