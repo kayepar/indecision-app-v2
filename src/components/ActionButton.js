@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
-import OptionsContext from '../context/optionsContext';
-import PickedOptionContext from '../context/pickedOptionContext';
+import React from 'react';
+import { useOptions } from '../context/optionsContext';
+import { usePickedOption } from '../context/pickedOptionContext';
 
 const ActionButton = () => {
-    const { options } = useContext(OptionsContext);
-    const { pickedOptionDispatch } = useContext(PickedOptionContext);
+    const { options } = useOptions();
+    const { pickedOptionDispatch } = usePickedOption();
 
     const handlePickOption = () => {
         const randomNumber = Math.floor(Math.random() * options.length);
