@@ -4,9 +4,7 @@ import OptionsReducer from '../reducers/optionsReducer';
 const OptionsContext = React.createContext();
 
 const OptionsProvider = ({ children }) => {
-    const defaultOptions = ['one', 'two', 'three'];
-
-    const [options, optionsDispatch] = useReducer(OptionsReducer, defaultOptions);
+    const [options, optionsDispatch] = useReducer(OptionsReducer, []);
     const value = { options, optionsDispatch };
 
     return <OptionsContext.Provider value={value}>{children}</OptionsContext.Provider>;
