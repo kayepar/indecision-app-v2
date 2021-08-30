@@ -13,9 +13,7 @@ const IndecisionApp = () => {
             <Header />
             <PickedOptionProvider>
                 <div className="container container--content">
-                    <div>
-                        <ActionButton />
-                    </div>
+                    <ActionButton />
                     <Options />
                     <ActionModal />
                     <AddForm />
