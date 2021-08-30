@@ -1,11 +1,11 @@
 import React from 'react';
 import Modal from 'react-modal';
-import { usePickedOption } from '../context/pickedOptionContext';
+import { usePickedOptionContext } from '../context/pickedOptionContext';
 
 Modal.setAppElement('#root');
 
 const ActionModal = () => {
-    const { pickedOption, pickedOptionDispatch } = usePickedOption();
+    const { pickedOption, pickedOptionDispatch } = usePickedOptionContext();
 
     const handleCloseModal = () => {
         pickedOptionDispatch({ type: 'CLEAR_PICKED_OPTION' });

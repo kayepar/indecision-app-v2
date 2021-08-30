@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { useOptions } from '../context/optionsContext';
+import { useOptionsContext } from '../context/optionsContext';
 
 const AddForm = () => {
     const [error, setError] = useState(undefined);
-    const { options, optionsDispatch } = useOptions();
+    const { options, optionsDispatch } = useOptionsContext();
 
     const handleAddOption = (e) => {
         e.preventDefault();

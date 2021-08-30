@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
 import Option from './Option';
-import { useOptions } from '../context/optionsContext';
+import { useOptionsContext } from '../context/optionsContext';
 
 const Options = () => {
-    const { options, optionsDispatch } = useOptions();
+    const { options, optionsDispatch } = useOptionsContext();
 
+    // todo: convert these to a custom hook? https://dev.to/sanderdebr/building-a-custom-react-localstorage-hook-2bja
+    // load options
     useEffect(() => {
         console.log('load Options');
         const optionsFromStorage = JSON.parse(localStorage.getItem('options'));
@@ -14,6 +16,7 @@ const Options = () => {
         }
     }, [optionsDispatch]);
 
+    // save option to localstorage
     useEffect(() => {
         console.log('Options - load Options - changed options value');
         localStorage.setItem('options', JSON.stringify(options));

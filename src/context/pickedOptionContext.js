@@ -10,10 +10,12 @@ const PickedOptionProvider = ({ children }) => {
     return <PickedOptionContext.Provider value={value}>{children}</PickedOptionContext.Provider>;
 };
 
-const usePickedOption = () => {
+const usePickedOptionContext = () => {
     const context = React.useContext(PickedOptionContext);
+
+    if (!context) throw new Error('usePickedOptionContext must be used within an PickedOptionProvider');
 
     return context;
 };
 
-export { usePickedOption, PickedOptionProvider as default };
+export { usePickedOptionContext, PickedOptionProvider as default };

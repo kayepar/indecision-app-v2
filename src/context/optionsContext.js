@@ -10,10 +10,12 @@ const OptionsProvider = ({ children }) => {
     return <OptionsContext.Provider value={value}>{children}</OptionsContext.Provider>;
 };
 
-const useOptions = () => {
+const useOptionsContext = () => {
     const context = React.useContext(OptionsContext);
+
+    if (!context) throw new Error('useOptionsContext must be used within an OptionsProvider');
 
     return context;
 };
 
-export { useOptions, OptionsProvider as default };
+export { useOptionsContext, OptionsProvider as default };

@@ -1,10 +1,10 @@
 import React from 'react';
-import { useOptions } from '../context/optionsContext';
-import { usePickedOption } from '../context/pickedOptionContext';
+import { useOptionsContext } from '../context/optionsContext';
+import { usePickedOptionContext } from '../context/pickedOptionContext';
 
 const ActionButton = () => {
-    const { options } = useOptions();
-    const { pickedOptionDispatch } = usePickedOption();
+    const { options } = useOptionsContext();
+    const { pickedOptionDispatch } = usePickedOptionContext();
 
     const handlePickOption = () => {
         const randomNumber = Math.floor(Math.random() * options.length);
@@ -14,11 +14,11 @@ const ActionButton = () => {
     };
 
     return (
-        <>
+        <div>
             <button id="big-button" className="big-button" onClick={handlePickOption} disabled={options.length < 1}>
                 Choose for me
             </button>
-        </>
+        </div>
     );
 };
 
