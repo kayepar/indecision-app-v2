@@ -7,6 +7,7 @@
 .add-option-error {
     color: white;
     font-style: italic;
+    font-size: $font-size-xs;
     margin: 0;
     padding: 0 0 $m-size 0;
 }
@@ -18,7 +19,7 @@
 }
 
 .add-option__input {
-    background: $off-white;
+    background: $white;
     border: none;
     flex-grow: 1;
     padding: $s-size;

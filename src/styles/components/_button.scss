@@ -32,7 +32,7 @@
     // width: 100px;
 
     &:hover {
-        background: darken($secondary-color, 10%);
+        background: darken($secondary-color, 5%);
     }
 }
 
@@ -45,7 +45,7 @@
 
     &:hover {
         background: none;
-        color: darken($secondary-color, 10%);
+        color: darken($secondary-color, 5%);
     }
 
     &:disabled {
