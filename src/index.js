@@ -4,11 +4,14 @@ import reportWebVitals from './reportWebVitals';
 import 'normalize.css/normalize.css';
 import './styles/styles.scss';
 
+import OptionsProvider from '../src/context/optionsContext';
 import IndecisionApp from './components/IndecisionApp';
 
 ReactDOM.render(
     <React.StrictMode>
-        <IndecisionApp />
+        <OptionsProvider>
+            <IndecisionApp />
+        </OptionsProvider>
     </React.StrictMode>,
     document.getElementById('root')
 );
