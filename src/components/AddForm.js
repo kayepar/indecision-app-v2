@@ -16,6 +16,7 @@ const AddForm = () => {
         } else {
             optionsDispatch({ type: 'ADD_OPTION', option });
             e.target.elements.option.value = '';
+            setError(undefined);
         }
     };
 
@@ -43,7 +44,7 @@ const AddForm = () => {
         <div className="add-option-container">
             {error && <p className="add-option-error">{error}</p>}
             <form className="add-option" onSubmit={handleAddOption}>
-                <input className="add-option__input" type="text" name="option" autoComplete="off"></input>
+                <input className="add-option__input" type="text" name="option" autoComplete="off" autoFocus></input>
                 <button className="button">Add Option</button>
             </form>
         </div>
