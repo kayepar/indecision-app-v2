@@ -36,6 +36,15 @@
     }
 }
 
+.button-dark {
+    background: $grey;
+    margin-right: $m-size;
+
+    &:hover {
+        background: darken($grey, 5%);
+    }
+}
+
 .button--link {
     background: none;
     color: $secondary-color;

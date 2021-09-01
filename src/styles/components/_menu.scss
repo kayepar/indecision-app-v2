@@ -1,5 +1,6 @@
 .menu-icon {
-    color: $turquoise;
+    color: $secondary-color;
+    font-size: $font-size-small;
 
     &:hover {
         color: white;
@@ -15,12 +16,10 @@
 
 .MuiListItem-button {
     &:hover {
-        // text-decoration: none;
-        background-color: rgba(240, 148, 60, 0.3) !important;
+        background-color: rgba(253, 214, 33, 0.5) !important;
     }
 }
 
 .menu-item {
-    // color: $orange-color !important;
     font-size: 1.4rem !important;
 }
