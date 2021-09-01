@@ -1,13 +1,19 @@
 import React from 'react';
 import Modal from 'react-modal';
+import { useOptionsContext } from '../context/optionsContext';
 import { usePickedOptionContext } from '../context/pickedOptionContext';
+import useLocalStorage from '../hooks/useLocalStorage';
 
 Modal.setAppElement('#root');
 
 const ActionModal = () => {
     const { pickedOption, pickedOptionDispatch } = usePickedOptionContext();
+    const [autoDelete] = useLocalStorage('autoDelete');
+    const { optionsDispatch } = useOptionsContext();
 
     const handleCloseModal = () => {
+        if (autoDelete) optionsDispatch({ type: 'DELETE_OPTION', option: pickedOption });
+
         pickedOptionDispatch({ type: 'CLEAR_PICKED_OPTION' });
     };
 
