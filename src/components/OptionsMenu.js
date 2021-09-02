@@ -3,6 +3,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuIcon from '@material-ui/icons/Menu';
+import Switch from '@material-ui/core/Switch';
 import ConfirmationModal from './ConfirmationModal';
 import useLocalStorage from '../hooks/useLocalStorage';
 
@@ -64,7 +65,14 @@ const OptionsMenu = (props) => {
                 }}
             >
                 <MenuItem className="menu-item" onClick={handleAutoDeleteSwitch}>
-                    Auto-delete: {autoDelete ? 'ON' : 'OFF'}
+                    Auto-delete
+                    <Switch
+                        size="small"
+                        checked={autoDelete}
+                        onChange={handleAutoDeleteSwitch}
+                        name="auto-delete-switch"
+                        inputProps={{ 'aria-label': 'auto-delete-switch' }}
+                    />
                 </MenuItem>
                 <MenuItem className="menu-item" disabled={!props.options.length > 0} onClick={handleOpenConfirmation}>
                     Delete All
