@@ -1,6 +1,7 @@
 .menu-icon {
     color: $secondary-color;
     font-size: $font-size-small;
+    margin: 12px !important;
 
     &:hover {
         color: white;
@@ -8,6 +9,8 @@
 }
 
 .MuiIconButton-root {
+    padding: 0px 5px !important;
+
     &:hover {
         // remove color change
         background-color: rgba(240, 148, 60, 0) !important;
@@ -22,4 +25,17 @@
 
 .menu-item {
     font-size: 1.4rem !important;
+}
+
+// styles for auto-delete switch
+.MuiSwitch-switchBase {
+    top: 3px !important;
+}
+
+.Mui-checked {
+    color: $secondary-color !important;
+}
+
+.MuiSwitch-colorSecondary.Mui-checked + .MuiSwitch-track {
+    background-color: lighten($primary-color, 5%) !important;
 }
