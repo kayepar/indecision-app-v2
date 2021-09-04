@@ -29,7 +29,6 @@
     color: $white;
     font-weight: 500;
     padding: $s-size $m-size;
-    // width: 100px;
 
     &:hover {
         background: darken($secondary-color, 5%);
@@ -64,21 +63,5 @@
             background: none;
             color: $secondary-color;
         }
-    }
-}
-
-.button--link-dark {
-    background: none;
-    border: none;
-    border-radius: 50%;
-    color: $primary-color;
-    outline: none;
-    padding: 11px 16px 12px;
-    transition: background 0.2s linear;
-    width: auto;
-
-    &:hover {
-        color: $white;
-        background: lighten($secondary-color, 20%);
     }
 }
