@@ -22,9 +22,4 @@ const IndecisionApp = () => {
     );
 };
 
-// todo: wire delete all --> add a confirmation first
-// todo: make delete button an icon
-// todo: nice to have -> auto-scroll
-// todo: add tests
-
 export default IndecisionApp;
