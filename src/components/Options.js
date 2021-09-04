@@ -8,7 +8,7 @@ import OptionsMenu from './OptionsMenu';
 const Options = () => {
     const { options, optionsDispatch } = useOptionsContext();
     const [optionsFromStorage, saveOptionsToStorage] = useLocalStorage('options', []);
-    const optionsContainer = useAutoScroll(options.length);
+    const optionsContainerRef = useAutoScroll(options.length);
 
     // load options
     useEffect(() => {
@@ -31,7 +31,7 @@ const Options = () => {
                 <h3 className="widget-header__title">Your Options</h3>
                 <OptionsMenu options={options} />
             </div>
-            <div className="widget-content" ref={optionsContainer}>
+            <div className="widget-content" ref={optionsContainerRef}>
                 {options.length === 0 && <p className="widget__message">Please add an option to get started</p>}
                 {options.map((option, index) => (
                     <Option key={option} text={option} index={index + 1} />
