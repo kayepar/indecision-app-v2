@@ -1,16 +1,16 @@
 import React from 'react';
 import { useOptionsContext } from '../context/optionsContext';
-import { usePickedOptionContext } from '../context/pickedOptionContext';
 
-const ActionButton = () => {
+const ActionButton = (props) => {
     const { options } = useOptionsContext();
-    const { pickedOptionDispatch } = usePickedOptionContext();
+
+    console.log(options);
 
     const handlePickOption = () => {
         const randomNumber = Math.floor(Math.random() * options.length);
         const pickedOption = options[randomNumber];
 
-        pickedOptionDispatch({ type: 'SET_PICKED_OPTION', option: pickedOption });
+        props.updatePickedOption(pickedOption);
     };
 
     return (

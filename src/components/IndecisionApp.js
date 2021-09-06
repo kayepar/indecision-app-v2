@@ -1,23 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from './Header';
 import ActionButton from './ActionButton';
-import PickedOptionProvider from '../context/pickedOptionContext';
 import ActionModal from './ActionModal';
 import Options from './Options';
 import AddForm from './AddForm';
 
 const IndecisionApp = () => {
+    const [pickedOption, setPickedOption] = useState(undefined);
+
+    const updatePickedOption = (option) => {
+        setPickedOption(option);
+    };
+
     return (
         <>
             <Header />
-            <PickedOptionProvider>
-                <div className="container container--content">
-                    <ActionButton />
-                    <Options />
-                    <ActionModal />
-                    <AddForm />
-                </div>
-            </PickedOptionProvider>
+            <div className="container container--content">
+                <ActionButton updatePickedOption={updatePickedOption} />
+                <Options />
+                <AddForm />
+            </div>
+            <ActionModal pickedOption={pickedOption} updatePickedOption={updatePickedOption} />
         </>
     );
 };
