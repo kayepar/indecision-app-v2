@@ -4,8 +4,6 @@ import { useOptionsContext } from '../context/optionsContext';
 const ActionButton = (props) => {
     const { options } = useOptionsContext();
 
-    console.log(options);
-
     const handlePickOption = () => {
         const randomNumber = Math.floor(Math.random() * options.length);
         const pickedOption = options[randomNumber];
