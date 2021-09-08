@@ -26,7 +26,7 @@ const AddForm = () => {
         if (!option) {
             error = 'Enter a valid option';
         } else if (ifOptionExists(option)) {
-            error = `This option already exists (# ${getOptionIndex(option)})`;
+            error = `This option already exists (#${getOptionIndex(option)})`;
         }
 
         return error;
