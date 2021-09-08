@@ -52,6 +52,6 @@ describe('Tests for ActionButton', () => {
         addOption('HTML5');
         userEvent.click(chooseForMeButton);
 
-        expect(updatePickedOptionSpy).toBeCalled();
+        expect(updatePickedOptionSpy).toBeCalledWith('HTML5');
     });
 });
