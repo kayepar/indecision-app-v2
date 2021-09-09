@@ -45,7 +45,7 @@ describe('Tests for ActionButton', () => {
         expect(chooseForMeButton).toBeEnabled();
     });
 
-    test('If button is clicked, should call updatePickedOption prop function', () => {
+    test('If button is clicked, should set pickedOption', () => {
         const { getByRole } = renderComponents();
         const chooseForMeButton = getByRole('button', { name: 'Choose for me' });
 
