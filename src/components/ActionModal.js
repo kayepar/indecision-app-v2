@@ -3,7 +3,7 @@ import Modal from 'react-modal';
 import { useOptionsContext } from '../context/optionsContext';
 import useLocalStorage from '../hooks/useLocalStorage';
 
-Modal.setAppElement('#root');
+// Modal.setAppElement('#root');
 
 const ActionModal = (props) => {
     const [autoDelete] = useLocalStorage('autoDelete');
@@ -17,6 +17,7 @@ const ActionModal = (props) => {
 
     return (
         <Modal
+            appElement={document.querySelector('#root')}
             isOpen={!!props.pickedOption}
             contentLabel="Selected Option"
             onRequestClose={handleCloseModal}
