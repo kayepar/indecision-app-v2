@@ -37,7 +37,7 @@ describe('Tests for ActionModal component', () => {
 
         userEvent.click(buttonElement);
 
-        expect(props.updatePickedOption).toBeCalledWith(undefined);
+        expect(props.updatePickedOption).toHaveBeenCalledWith(undefined);
     });
 
     // todo: Complete workflow with form and choose for me button
