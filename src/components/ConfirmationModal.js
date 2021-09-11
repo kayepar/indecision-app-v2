@@ -2,7 +2,7 @@ import React from 'react';
 import Modal from 'react-modal';
 import { useOptionsContext } from '../context/optionsContext';
 
-Modal.setAppElement('#root');
+// Modal.setAppElement('#root');
 
 const ConfirmationModal = (props) => {
     const { optionsDispatch } = useOptionsContext();
@@ -14,6 +14,7 @@ const ConfirmationModal = (props) => {
 
     return (
         <Modal
+            appElement={document.querySelector('#root')}
             isOpen={props.showConfirmation}
             contentLabel="Confirm your request"
             onRequestClose={props.handleClose}
