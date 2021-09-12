@@ -1,147 +1,114 @@
-import { render, screen, cleanup } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import AddForm from '../../components/AddForm';
+import Modal from 'react-modal';
 import OptionsProvider from '../../context/optionsContext';
+import IndecisionApp from '../../components/IndecisionApp';
 
-afterEach(cleanup);
+beforeEach(() => {
+    const { container } = renderComponent();
+    Modal.setAppElement(container);
+});
 
-const renderComponents = () => {
+const renderComponent = () => {
     return render(
         <OptionsProvider>
-            <AddForm />
+            <IndecisionApp />
         </OptionsProvider>
     );
 };
 
-const addOptions = (options) => {
-    options.forEach((option) => {
-        addOption(option);
-    });
-};
-
 const addOption = (option) => {
-    const { inputElement, buttonElement } = getElements();
+    const { addOptionTextbox, addOptionButton } = getElements();
 
-    userEvent.type(inputElement, option);
-    userEvent.click(buttonElement);
+    userEvent.type(addOptionTextbox, option);
+    userEvent.click(addOptionButton);
 };
 
 const getElements = () => {
-    const inputElement = screen.getByRole('textbox');
-    const buttonElement = screen.getByRole('button');
+    const addOptionTextbox = screen.getByRole('textbox');
+    const addOptionButton = screen.getByRole('button', { name: 'Add Option' });
 
-    return { inputElement, buttonElement };
+    return { addOptionTextbox, addOptionButton };
 };
 
 describe('Tests for AddForm component', () => {
     describe('Initialization tests', () => {
         test('Should correctly render the AddForm component', () => {
-            const { asFragment } = renderComponents();
+            const { addOptionTextbox, addOptionButton } = getElements();
 
-            expect(asFragment()).toMatchSnapshot();
-        });
-
-        test('On load, should have focus on the input box', () => {
-            const { getByRole } = renderComponents();
-            const inputElement = getByRole('textbox');
-
-            expect(inputElement).toHaveFocus();
+            expect(addOptionTextbox).toBeInTheDocument();
+            expect(addOptionTextbox).toHaveFocus();
+            expect(addOptionButton).toBeInTheDocument();
         });
 
         test('Should be able to type into the input box', () => {
-            const { getByRole } = renderComponents();
-            const inputElement = getByRole('textbox');
             const optionText = 'React JS';
+            const { addOptionTextbox } = getElements();
 
-            userEvent.type(inputElement, optionText);
+            userEvent.type(addOptionTextbox, optionText);
 
-            expect(inputElement.value).toEqual(optionText);
+            expect(addOptionTextbox.value).toEqual(optionText);
         });
     });
 
     describe('Valid form submissions', () => {
-        test('If input box has text and the button is clicked, should not show error message', () => {
-            const { queryByText } = renderComponents();
-            const { inputElement } = getElements();
+        test('If input box has text and the button is clicked, should correctly add option', () => {
+            const { addOptionTextbox } = getElements();
 
             addOption('React JS');
 
-            expect(inputElement.value).toEqual('');
-            expect(queryByText(/Enter a valid option/i)).not.toBeInTheDocument();
+            expect(addOptionTextbox.value).toEqual('');
+            expect(screen.queryByText(/Enter a valid option/i)).not.toBeInTheDocument();
+            expect(screen.getByText(/1. React JS/i)).toBeInTheDocument();
         });
 
-        test('If valid option is entered after an error, should clear error message', async () => {
-            const { queryByText } = renderComponents();
-            const { inputElement } = getElements();
+        test('If valid option is entered after an error, should clear error message and add option', () => {
+            const { addOptionTextbox, addOptionButton } = getElements();
 
-            addOption(' '); // invalid option
+            userEvent.click(addOptionButton); // invalid
 
-            const errorElement = queryByText(/Enter a valid option/i);
+            const errorElement = screen.queryByText(/Enter a valid option/i);
 
             expect(errorElement).toBeInTheDocument();
 
-            addOption('HTML 5'); // valid option
+            addOption('HTML5'); // valid option
 
-            expect(inputElement.value).toBe('');
+            expect(addOptionTextbox.value).toBe('');
             expect(errorElement).not.toBeInTheDocument();
-        });
-
-        test('If multiple unique options are added, should not show error message', () => {
-            const options = ['React JS', 'Node JS', 'CSS'];
-            const { queryByText } = renderComponents();
-
-            addOptions(options);
-
-            const errorElement = queryByText(/This option already exists/i);
-
-            expect(errorElement).not.toBeInTheDocument();
+            expect(screen.getByText(/2. HTML5/i)).toBeInTheDocument();
         });
 
         test('Should submit form on enter key', () => {
-            const { queryByText } = renderComponents();
-            const { inputElement } = getElements();
+            const { addOptionTextbox } = getElements();
 
-            userEvent.type(inputElement, 'JAVA{enter}');
+            userEvent.type(addOptionTextbox, 'JAVA{enter}');
 
-            const errorElement = queryByText(/Enter a valid option/i);
+            const errorElement = screen.queryByText(/Enter a valid option/i);
 
-            expect(inputElement.value).toBe('');
+            expect(addOptionTextbox.value).toBe('');
             expect(errorElement).not.toBeInTheDocument();
+            expect(screen.getByText(/3. JAVA/i)).toBeInTheDocument();
         });
     });
 
     describe('Invalid form submissions', () => {
         test('If input box is empty and the button is clicked, should show error message', () => {
-            const { getByText, getByRole } = renderComponents();
+            userEvent.click(screen.getByRole('button', { name: 'Add Option' }));
 
-            userEvent.click(getByRole('button'));
-
-            const errorElement = getByText(/Enter a valid option/i);
+            const errorElement = screen.getByText(/Enter a valid option/i);
 
             expect(errorElement).toBeVisible();
         });
 
-        test('If option already exist, should show error message', () => {
-            const options = ['Javascript', 'Javascript'];
-            const { queryByText } = renderComponents();
+        test('If option already exists, should display error message', () => {
+            const optionText = 'React JS';
+            const { addOptionTextbox } = getElements();
 
-            addOptions(options);
+            addOption(optionText);
 
-            const errorElement = queryByText(/This option already exists \(#1\)/i);
-
-            expect(errorElement).toBeInTheDocument();
-        });
-
-        test('If option already exist, text should remain in the input box', () => {
-            const options = ['React JS', 'React JS'];
-            const { queryByText } = renderComponents();
-            addOptions(options);
-
-            const { inputElement } = getElements();
-            const errorElement = queryByText(/This option already exists/i);
-
-            expect(errorElement).toBeInTheDocument();
-            expect(inputElement.value).toBe(options[0]);
+            expect(addOptionTextbox.value).toEqual(optionText);
+            expect(screen.queryByText(/This option already exists \(#1\)/i)).toBeInTheDocument();
+            expect(screen.getAllByText(new RegExp(optionText, 'i'))).toHaveLength(1);
         });
     });
 });

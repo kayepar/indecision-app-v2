@@ -1,18 +1,18 @@
-import { render, screen, cleanup } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import ActionButton from '../../components/ActionButton';
+import Modal from 'react-modal';
 import OptionsProvider from '../../context/optionsContext';
-import AddForm from '../../components/AddForm';
+import IndecisionApp from '../../components/IndecisionApp';
 
-afterEach(cleanup);
+beforeEach(() => {
+    const { container } = renderComponent();
+    Modal.setAppElement(container);
+});
 
-const updatePickedOptionSpy = jest.fn();
-
-const renderComponents = () => {
+const renderComponent = () => {
     return render(
         <OptionsProvider>
-            <ActionButton updatePickedOption={updatePickedOptionSpy} />
-            <AddForm />
+            <IndecisionApp />
         </OptionsProvider>
     );
 };
@@ -24,34 +24,34 @@ const addOption = (option) => {
 
 describe('Tests for ActionButton', () => {
     test('Should correctly render the component', () => {
-        const { asFragment } = renderComponents();
+        const chooseForMeButton = screen.getByRole('button', { name: 'Choose for me' });
 
-        expect(asFragment()).toMatchSnapshot();
+        expect(chooseForMeButton).toBeInTheDocument();
     });
 
     test('If there are no options, should render the button as disabled', () => {
-        const { getByRole } = renderComponents();
-        const chooseForMeButton = getByRole('button', { name: 'Choose for me' });
+        const chooseForMeButton = screen.getByRole('button', { name: 'Choose for me' });
 
         expect(chooseForMeButton).toBeDisabled();
     });
 
     test('If option is available, should render the button as enabled', () => {
-        const { getByRole } = renderComponents();
-        const chooseForMeButton = getByRole('button', { name: 'Choose for me' });
+        const chooseForMeButton = screen.getByRole('button', { name: 'Choose for me' });
 
         addOption('Javascript');
 
         expect(chooseForMeButton).toBeEnabled();
     });
 
-    test('If button is clicked, should set pickedOption', () => {
-        const { getByRole } = renderComponents();
-        const chooseForMeButton = getByRole('button', { name: 'Choose for me' });
+    test('If button is clicked, should open modal dialog', () => {
+        const chooseForMeButton = screen.getByRole('button', { name: 'Choose for me' });
 
         addOption('HTML5');
+
         userEvent.click(chooseForMeButton);
 
-        expect(updatePickedOptionSpy).toBeCalledWith('HTML5');
+        const selectedOptionModal = screen.getByRole('dialog', { name: 'Selected Option' });
+
+        expect(selectedOptionModal).toBeInTheDocument();
     });
 });
