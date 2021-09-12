@@ -25,7 +25,9 @@ const ActionModal = (props) => {
             className="modal"
         >
             <h3 className="modal__title">Selected Option</h3>
-            <p className="modal__body">{props.pickedOption}</p>
+            <p className="modal__body" data-testid="picked-option">
+                {props.pickedOption}
+            </p>
             <button className="button" onClick={handleCloseModal}>
                 Okay
             </button>

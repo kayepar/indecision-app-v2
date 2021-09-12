@@ -12,7 +12,7 @@ const Options = () => {
 
     // load options
     useEffect(() => {
-        console.log('load options from storage');
+        // console.log('load options from storage');
 
         if (optionsFromStorage) {
             optionsDispatch({ type: 'LOAD_OPTIONS', options: optionsFromStorage });
@@ -21,12 +21,12 @@ const Options = () => {
 
     // save option to localstorage
     useEffect(() => {
-        console.log('save options to storage');
+        // console.log('save options to storage');
         saveOptionsToStorage(options);
     }, [options]);
 
     return (
-        <div className="widget">
+        <div className="widget" data-testid="options-list">
             <div className="widget-header">
                 <h3 className="widget-header__title">Your Options</h3>
                 <OptionsMenu options={options} />
