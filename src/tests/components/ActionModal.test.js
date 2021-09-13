@@ -1,45 +1,99 @@
-import { render, cleanup } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import ActionModal from '../../components/ActionModal';
+import Modal from 'react-modal';
 import OptionsProvider from '../../context/optionsContext';
+import IndecisionApp from '../../components/IndecisionApp';
 
-afterEach(cleanup);
+beforeEach(() => {
+    const { container } = renderComponent();
 
-const renderComponents = (props) => {
+    Modal.setAppElement(container);
+});
+
+const renderComponent = () => {
     return render(
         <OptionsProvider>
-            <ActionModal {...props} />
+            <IndecisionApp />
         </OptionsProvider>
     );
 };
 
+const addOption = (option) => {
+    userEvent.type(screen.getByRole('textbox'), option);
+    userEvent.click(screen.getByRole('button', { name: 'Add Option' }));
+};
+
 describe('Tests for ActionModal component', () => {
-    test('Should correctly render the component if an option is selected', () => {
-        const props = { pickedOption: 'CSS', updatePickedOption: jest.fn() };
-        const { getByRole } = renderComponents(props);
-        const modalElement = getByRole('dialog', { name: 'Selected Option' });
+    test(`If 'Choose for me' button is not clicked, should not render the component`, () => {
+        const selectedOptionModal = screen.queryByRole('dialog', { name: 'Selected Option' });
 
-        expect(modalElement).toBeInTheDocument();
+        expect(selectedOptionModal).not.toBeInTheDocument();
     });
 
-    test('Should not render the component if no option is selected', () => {
-        const props = { pickedOption: undefined, updatePickedOption: jest.fn() };
-        const { queryByRole } = renderComponents(props);
-        const modalElement = queryByRole('dialog', { name: 'Selected Option' });
+    test(`If 'Choose for me' button is clicked, should render the component`, () => {
+        const optionText = 'Node.js';
+        const chooseForMeButton = screen.getByRole('button', { name: 'Choose for me' });
 
-        expect(modalElement).not.toBeInTheDocument();
+        addOption(optionText);
+
+        userEvent.click(chooseForMeButton);
+
+        const selectedOptionModal = screen.getByRole('dialog', { name: 'Selected Option' });
+        const pickedOption = screen.getByTestId('picked-option');
+
+        expect(selectedOptionModal).toBeInTheDocument();
+        expect(pickedOption.textContent).toEqual(optionText);
     });
 
-    test('If Okay button is clicked, should clear pickedOption', () => {
-        const props = { pickedOption: 'HTML5', updatePickedOption: jest.fn() };
-        const { getByRole } = renderComponents(props);
-        const buttonElement = getByRole('button', { name: 'Okay' });
+    test('If Okay button is clicked, should close the modal dialog', async () => {
+        const chooseForMeButton = screen.getByRole('button', { name: 'Choose for me' });
 
-        userEvent.click(buttonElement);
+        userEvent.click(chooseForMeButton);
 
-        expect(props.updatePickedOption).toHaveBeenCalledWith(undefined);
+        const selectedOptionModal = screen.getByRole('dialog', { name: 'Selected Option' });
+
+        expect(selectedOptionModal).toBeInTheDocument();
+
+        const okayButton = screen.getByRole('button', { name: 'Okay' });
+
+        userEvent.click(okayButton);
+
+        await waitFor(() => {
+            expect(screen.queryByRole('dialog', { name: 'Selected Option' })).not.toBeInTheDocument();
+        });
     });
 
-    // todo: Complete workflow with form and choose for me button
-    // todo: autodelete?
+    test('If Escape key is clicked, should close the modal dialog', async () => {
+        const chooseForMeButton = screen.getByRole('button', { name: 'Choose for me' });
+
+        userEvent.click(chooseForMeButton);
+
+        const selectedOptionModal = screen.getByRole('dialog', { name: 'Selected Option' });
+
+        expect(selectedOptionModal).toBeInTheDocument();
+
+        userEvent.keyboard('{escape}');
+
+        await waitFor(() => {
+            expect(screen.queryByRole('dialog', { name: 'Selected Option' })).not.toBeInTheDocument();
+        });
+    });
+
+    test('If clicked outside, should close the modal dialog', async () => {
+        const chooseForMeButton = screen.getByRole('button', { name: 'Choose for me' });
+
+        userEvent.click(chooseForMeButton);
+
+        const selectedOptionModal = screen.getByRole('dialog', { name: 'Selected Option' });
+
+        expect(selectedOptionModal).toBeInTheDocument();
+
+        const modalOverlay = document.querySelector('.ReactModal__Overlay');
+
+        userEvent.click(modalOverlay); // click anywhere
+
+        await waitFor(() => {
+            expect(screen.queryByRole('dialog', { name: 'Selected Option' })).not.toBeInTheDocument();
+        });
+    });
 });
