@@ -6,6 +6,7 @@ import IndecisionApp from '../../components/IndecisionApp';
 
 beforeEach(() => {
     const { container } = renderComponent();
+
     Modal.setAppElement(container);
 });
 
@@ -67,14 +68,12 @@ describe('Tests for AddForm component', () => {
 
             userEvent.click(addOptionButton); // invalid
 
-            const errorElement = screen.queryByText(/Enter a valid option/i);
-
-            expect(errorElement).toBeInTheDocument();
+            expect(screen.getByText(/Enter a valid option/i)).toBeInTheDocument();
 
             addOption('HTML5'); // valid option
 
             expect(addOptionTextbox.value).toBe('');
-            expect(errorElement).not.toBeInTheDocument();
+            expect(screen.queryByText(/Enter a valid option/i)).not.toBeInTheDocument();
             expect(screen.getByText(/2. HTML5/i)).toBeInTheDocument();
         });
 
@@ -83,10 +82,8 @@ describe('Tests for AddForm component', () => {
 
             userEvent.type(addOptionTextbox, 'JAVA{enter}');
 
-            const errorElement = screen.queryByText(/Enter a valid option/i);
-
             expect(addOptionTextbox.value).toBe('');
-            expect(errorElement).not.toBeInTheDocument();
+            expect(screen.queryByText(/Enter a valid option/i)).not.toBeInTheDocument();
             expect(screen.getByText(/3. JAVA/i)).toBeInTheDocument();
         });
     });
@@ -95,9 +92,7 @@ describe('Tests for AddForm component', () => {
         test('If input box is empty and the button is clicked, should show error message', () => {
             userEvent.click(screen.getByRole('button', { name: 'Add Option' }));
 
-            const errorElement = screen.getByText(/Enter a valid option/i);
-
-            expect(errorElement).toBeVisible();
+            expect(screen.getByText(/Enter a valid option/i)).toBeInTheDocument();
         });
 
         test('If option already exists, should display error message', () => {
@@ -107,7 +102,7 @@ describe('Tests for AddForm component', () => {
             addOption(optionText);
 
             expect(addOptionTextbox.value).toEqual(optionText);
-            expect(screen.queryByText(/This option already exists \(#1\)/i)).toBeInTheDocument();
+            expect(screen.getByText(/This option already exists \(#1\)/i)).toBeInTheDocument();
             expect(screen.getAllByText(new RegExp(optionText, 'i'))).toHaveLength(1);
         });
     });
