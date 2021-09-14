@@ -26,15 +26,15 @@ const Options = () => {
     }, [options]);
 
     return (
-        <div className="widget" data-testid="options-list">
+        <div className="widget">
             <div className="widget-header">
                 <h3 className="widget-header__title">Your Options</h3>
                 <OptionsMenu options={options} />
             </div>
-            <div className="widget-content" ref={optionsContainerRef}>
+            <div className="widget-content" ref={optionsContainerRef} data-testid="options-container">
                 {options.length === 0 && <p className="widget__message">Please add an option to get started</p>}
                 {options.map((option, index) => (
-                    <Option key={option} text={option} index={index + 1} />
+                    <Option data-testid="option-item" key={option} text={option} index={index + 1} />
                 ))}
             </div>
         </div>

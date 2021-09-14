@@ -11,7 +11,7 @@ const Option = (props) => {
     };
 
     return (
-        <div className="option">
+        <div className="option" data-testid="option-item">
             <p className="option__text">
                 {props.index}. {props.text}
             </p>
