@@ -79,7 +79,7 @@ describe('Tests for ActionModal component', () => {
         });
     });
 
-    test('If clicked outside, should close the modal dialog', async () => {
+    test('If user clicked anywhere else, should close the modal dialog', async () => {
         const chooseForMeButton = screen.getByRole('button', { name: 'Choose for me' });
 
         userEvent.click(chooseForMeButton);
