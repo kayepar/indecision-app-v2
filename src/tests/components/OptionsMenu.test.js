@@ -1,4 +1,4 @@
-import { render, screen, within, fireEvent } from '@testing-library/react';
+import { render, screen, waitFor, within, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Modal from 'react-modal';
 import OptionsProvider from '../../context/optionsContext';
@@ -57,6 +57,21 @@ describe('Tests for OptionsMenu component', () => {
         expect(deleteAllMenuItem).toHaveAttribute('aria-disabled', 'false');
     });
 
+    test('If user clicked anywhere else, should close the menu', () => {
+        const optionsMenuButton = screen.getByRole('button', { name: 'options-menu' });
+
+        userEvent.click(optionsMenuButton);
+
+        const menu = screen.getByRole('presentation', { id: 'options-menu' });
+        const overlay = menu.querySelector('div:nth-child(1)');
+
+        userEvent.click(overlay); // click outside of the menu
+
+        const menuContainer = menu.querySelector('div:nth-child(2)');
+
+        expect(menuContainer).toHaveStyle('opacity: 0');
+    });
+
     test(`If 'Delete All' menu-item is clicked, should open confirmation modal`, () => {
         const optionsMenuButton = screen.getByRole('button', { name: 'options-menu' });
 
@@ -73,4 +88,6 @@ describe('Tests for OptionsMenu component', () => {
 
     // todo: auto-delete should keep value even after closing - rerender?
     // todo: auto-delete
+    // todo: clicked button again should hide menu
+    // todo: clicking anywhere should hide menu
 });
