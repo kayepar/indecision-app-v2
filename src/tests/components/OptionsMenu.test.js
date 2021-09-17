@@ -1,9 +1,8 @@
-import { render, screen, waitFor, within, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Modal from 'react-modal';
 import OptionsProvider from '../../context/optionsContext';
 import IndecisionApp from '../../components/IndecisionApp';
-import wait from 'waait';
 
 beforeEach(() => {
     const { container } = renderComponent();
@@ -59,7 +58,7 @@ describe('Tests for OptionsMenu component', () => {
         });
     });
 
-    describe('Closeing of menu', () => {
+    describe('Closing of menu', () => {
         test('If Escape key is clicked, should close the menu', () => {
             const optionsMenuButton = screen.getByRole('button', { name: 'options-menu' });
 
