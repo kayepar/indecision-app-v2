@@ -41,6 +41,48 @@ describe('Tests for ConfirmationModal component', () => {
         expect(screen.getByRole('button', { name: 'Delete' })).toBeInTheDocument();
     });
 
+    test('If Escape key is clicked, should close the modal dialog', async () => {
+        const optionsMenuButton = screen.getByRole('button', { name: 'options-menu' });
+
+        userEvent.click(optionsMenuButton);
+
+        const deleteAllMenuItem = screen.getByRole('menuitem', { name: 'Delete All' });
+
+        userEvent.click(deleteAllMenuItem);
+
+        const confirmationDialog = screen.getByRole('dialog', { name: 'Confirm your request' });
+
+        expect(confirmationDialog).toBeInTheDocument();
+
+        userEvent.keyboard('{escape}');
+
+        await waitFor(() => {
+            expect(screen.queryByRole('dialog', { name: 'Confirm your request' })).not.toBeInTheDocument();
+        });
+    });
+
+    test('If user clicked anywhere else, should close the modal dialog', async () => {
+        const optionsMenuButton = screen.getByRole('button', { name: 'options-menu' });
+
+        userEvent.click(optionsMenuButton);
+
+        const deleteAllMenuItem = screen.getByRole('menuitem', { name: 'Delete All' });
+
+        userEvent.click(deleteAllMenuItem);
+
+        const confirmationDialog = screen.getByRole('dialog', { name: 'Confirm your request' });
+
+        expect(confirmationDialog).toBeInTheDocument();
+
+        const modalOverlay = document.querySelector('.ReactModal__Overlay');
+
+        userEvent.click(modalOverlay); // click anywhere
+
+        await waitFor(() => {
+            expect(screen.queryByRole('dialog', { name: 'Confirm your request' })).not.toBeInTheDocument();
+        });
+    });
+
     test('If cancel button is clicked, should not delete option(s)', async () => {
         const optionsMenuButton = screen.getByRole('button', { name: 'options-menu' });
 
@@ -65,6 +107,8 @@ describe('Tests for ConfirmationModal component', () => {
     });
 
     test('If delete button is clicked, should delete option(s)', async () => {
+        addOption('React.js'); // added one more option
+
         const optionsMenuButton = screen.getByRole('button', { name: 'options-menu' });
 
         userEvent.click(optionsMenuButton);
@@ -84,10 +128,6 @@ describe('Tests for ConfirmationModal component', () => {
             expect(screen.queryByRole('dialog', { name: 'Confirm your request' })).not.toBeInTheDocument();
         });
 
-        expect(screen.queryByText(/1. Javascript/i)).not.toBeInTheDocument(); // option added from test case 1
+        expect(screen.queryAllByPlaceholderText('option-item')).toHaveLength(0); // no options left
     });
-
-    // todo: add more options
-    // todo: should close on escape
-    // todo: should close on outside clicks
 });
