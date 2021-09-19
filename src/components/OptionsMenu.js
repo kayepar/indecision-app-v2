@@ -30,7 +30,6 @@ const OptionsMenu = (props) => {
     };
 
     const handleCloseConfirmation = () => {
-        console.log('handleclose');
         setShowConfimation(false);
     };
 
