@@ -35,7 +35,7 @@ const OptionsMenu = (props) => {
 
     useEffect(() => {
         saveAutoDeleteToStorage(autoDelete);
-    }, [autoDelete, saveAutoDeleteToStorage]);
+    }, [autoDelete]);
 
     return (
         <div>
