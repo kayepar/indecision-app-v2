@@ -1,14 +1,11 @@
 import React from 'react';
-import { useOptionsContext } from '../context/optionsContext';
 
-const ActionButton = (props) => {
-    const { options } = useOptionsContext();
-
+const ActionButton = ({ options, updatePickedOption }) => {
     const handlePickOption = () => {
         const randomNumber = Math.floor(Math.random() * options.length);
         const pickedOption = options[randomNumber];
 
-        props.updatePickedOption(pickedOption);
+        updatePickedOption(pickedOption);
     };
 
     return (

@@ -1,16 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuIcon from '@material-ui/icons/Menu';
 import Switch from '@material-ui/core/Switch';
 import ConfirmationModal from './ConfirmationModal';
-import useLocalStorage from '../hooks/useLocalStorage';
 
-const OptionsMenu = (props) => {
+const OptionsMenu = ({ options, optionsDispatch, autoDelete, autoDeleteDispatch }) => {
     const [anchorEl, setAnchorEl] = useState(null);
-    const [autoDeleteFromStorage, saveAutoDeleteToStorage] = useLocalStorage('autoDelete', false);
-    const [autoDelete, setAutoDelete] = useState(autoDeleteFromStorage);
     const [showConfirmation, setShowConfimation] = useState(false);
 
     const handleOpenMenu = (e) => {
@@ -21,7 +18,7 @@ const OptionsMenu = (props) => {
     const handleCloseMenu = () => setAnchorEl(null);
 
     const handleAutoDeleteSwitch = () => {
-        setAutoDelete(!autoDelete);
+        autoDeleteDispatch({ type: 'SET_VALUE', value: !autoDelete });
     };
 
     const handleOpenConfirmation = () => {
@@ -32,10 +29,6 @@ const OptionsMenu = (props) => {
     const handleCloseConfirmation = () => {
         setShowConfimation(false);
     };
-
-    useEffect(() => {
-        saveAutoDeleteToStorage(autoDelete);
-    }, [autoDelete]);
 
     return (
         <div>
@@ -73,11 +66,15 @@ const OptionsMenu = (props) => {
                         inputProps={{ 'aria-label': 'auto-delete-switch' }}
                     />
                 </MenuItem>
-                <MenuItem className="menu-item" disabled={!props.options.length > 0} onClick={handleOpenConfirmation}>
+                <MenuItem className="menu-item" disabled={!options.length > 0} onClick={handleOpenConfirmation}>
                     Delete All
                 </MenuItem>
             </Menu>
-            <ConfirmationModal showConfirmation={showConfirmation} handleClose={handleCloseConfirmation} />
+            <ConfirmationModal
+                optionsDispatch={optionsDispatch}
+                showConfirmation={showConfirmation}
+                handleClose={handleCloseConfirmation}
+            />
         </div>
     );
 };
