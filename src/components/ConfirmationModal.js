@@ -4,7 +4,6 @@ import Modal from 'react-modal';
 // Modal.setAppElement('#root');
 
 const ConfirmationModal = ({ optionsDispatch, showConfirmation, handleClose }) => {
-    console.log('confirmation modal!');
     const handleDeleteAll = () => {
         optionsDispatch({ type: 'DELETE_ALL' });
         handleClose();
@@ -31,4 +30,4 @@ const ConfirmationModal = ({ optionsDispatch, showConfirmation, handleClose }) =
     );
 };
 
-export default ConfirmationModal;
+export default React.memo(ConfirmationModal);

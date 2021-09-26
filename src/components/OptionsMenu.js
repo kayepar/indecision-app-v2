@@ -26,9 +26,9 @@ const OptionsMenu = ({ options, optionsDispatch, autoDelete, autoDeleteDispatch 
         setShowConfimation(true);
     };
 
-    const handleCloseConfirmation = () => {
+    const handleCloseConfirmation = React.useCallback(() => {
         setShowConfimation(false);
-    };
+    }, []);
 
     return (
         <div>
