@@ -4,17 +4,23 @@ import reportWebVitals from './reportWebVitals';
 import 'normalize.css/normalize.css';
 import './styles/styles.scss';
 
-import OptionsProvider from '../src/context/optionsContext';
 import IndecisionApp from './components/IndecisionApp';
 
 ReactDOM.render(
     <React.StrictMode>
-        <OptionsProvider>
-            <IndecisionApp />
-        </OptionsProvider>
+        <IndecisionApp />
     </React.StrictMode>,
     document.getElementById('root')
 );
+
+// import SaveToLocalStorage from './playground/SaveToLocaleStorage';
+
+// ReactDOM.render(
+//     <React.StrictMode>
+//         <SaveToLocalStorage />
+//     </React.StrictMode>,
+//     document.getElementById('root')
+// );
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
