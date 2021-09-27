@@ -1,6 +1,6 @@
 import React from 'react';
-import IconButton from '@material-ui/core/IconButton';
-import DeleteOutlineRoundedIcon from '@material-ui/icons/DeleteOutlineRounded';
+import IconButton from '@mui/material/IconButton';
+import DeleteOutlineRoundedIcon from '@mui/icons-material/DeleteOutlineRounded';
 
 const Option = ({ optionsDispatch, index, text }) => {
     const handleDeleteOption = (option) => {

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import IconButton from '@material-ui/core/IconButton';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import MenuIcon from '@material-ui/icons/Menu';
-import Switch from '@material-ui/core/Switch';
+import IconButton from '@mui/material/IconButton';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import MenuIcon from '@mui/icons-material/Menu';
+import Switch from '@mui/material/Switch';
 import ConfirmationModal from './ConfirmationModal';
 
 const OptionsMenu = ({ options, optionsDispatch, autoDelete, autoDeleteDispatch }) => {
@@ -46,7 +46,6 @@ const OptionsMenu = ({ options, optionsDispatch, autoDelete, autoDeleteDispatch 
                 open={Boolean(anchorEl)}
                 onClose={handleCloseMenu}
                 keepMounted
-                getContentAnchorEl={null}
                 anchorOrigin={{
                     vertical: 'bottom',
                     horizontal: 'right',
