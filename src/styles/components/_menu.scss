@@ -29,13 +29,13 @@
 
 // styles for auto-delete switch
 .MuiSwitch-switchBase {
-    top: 3px !important;
+    top: 0.2px !important;
+}
+
+.MuiSwitch-track {
+    background-color: lighten($primary-color, 5%) !important;
 }
 
 .Mui-checked {
     color: $secondary-color !important;
-}
-
-.MuiSwitch-colorSecondary.Mui-checked + .MuiSwitch-track {
-    background-color: lighten($primary-color, 5%) !important;
 }
