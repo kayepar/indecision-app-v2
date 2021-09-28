@@ -6,14 +6,14 @@ import Options from './Options';
 import AddForm from './AddForm';
 import optionsReducer from '../reducers/optionsReducer';
 import autoDeleteReducer from '../reducers/autoDeleteReducer';
-import useLocalStorage2 from '../hooks/useLocalStorage2';
+import useLocalStorage from '../hooks/useLocalStorage';
 
 const IndecisionApp = () => {
     const [pickedOption, setPickedOption] = useState(undefined);
-    const [optionsFromStorage, saveOptionsToStorage] = useLocalStorage2('options', []);
+    const [optionsFromStorage, saveOptionsToStorage] = useLocalStorage('options', []);
     const [options, optionsDispatch] = useReducer(optionsReducer, optionsFromStorage);
 
-    const [autoDeleteFromStorage, saveAutoDeleteToStorage] = useLocalStorage2('autoDelete', false);
+    const [autoDeleteFromStorage, saveAutoDeleteToStorage] = useLocalStorage('autoDelete', false);
     const [autoDelete, autoDeleteDispatch] = useReducer(autoDeleteReducer, autoDeleteFromStorage);
 
     const updatePickedOption = (option) => {
