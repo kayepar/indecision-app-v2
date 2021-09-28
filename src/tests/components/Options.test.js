@@ -47,13 +47,15 @@ describe('Tests for Options component', () => {
         expect(option_items).toHaveLength(1);
     });
 
-    test('Should be able to display multiple options', () => {
+    test('Should be able to display multiple options, latest should added at the bottom', () => {
         addOption('React.js');
 
         const options_container = screen.getByTestId('options-container');
-        const option_items = within(options_container).getAllByTestId('option-item');
+        const option_items = within(options_container).getAllByTestId('option-text');
 
         expect(option_items).toHaveLength(2);
+        expect(option_items[0].textContent).toEqual('1. Javascript');
+        expect(option_items[1].textContent).toEqual('2. React.js');
     });
 
     // todo: Notes: scrollbar appearing after 3 options and auto-scroll are better tested in E2E
