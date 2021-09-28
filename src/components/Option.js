@@ -9,7 +9,7 @@ const Option = ({ optionsDispatch, index, text }) => {
 
     return (
         <div className="option" data-testid="option-item">
-            <p className="option__text">
+            <p className="option__text" data-testid="option-text">
                 {index}. {text}
             </p>
             <IconButton aria-label="delete" onClick={() => handleDeleteOption(text)}>
