@@ -7,6 +7,8 @@ import './styles/styles.scss';
 import OptionsProvider from '../src/context/optionsContext';
 import IndecisionApp from './components/IndecisionApp';
 
+//! This branch serves as a copy of the app with Context API
+
 ReactDOM.render(
     <React.StrictMode>
         <OptionsProvider>
