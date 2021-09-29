@@ -48,7 +48,6 @@ const IndecisionApp = () => {
                 pickedOption={pickedOption}
                 updatePickedOption={updatePickedOption}
                 autoDelete={autoDelete}
-                autoDeleteDispatch={autoDeleteDispatch}
             />
         </>
     );

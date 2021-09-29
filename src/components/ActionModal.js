@@ -1,7 +1,7 @@
 import React from 'react';
 import Modal from 'react-modal';
 
-const ActionModal = ({ optionsDispatch, pickedOption, updatePickedOption, autoDelete, autoDeleteDispatch }) => {
+const ActionModal = ({ optionsDispatch, pickedOption, updatePickedOption, autoDelete }) => {
     const handleCloseModal = () => {
         if (autoDelete) optionsDispatch({ type: 'DELETE_OPTION', option: pickedOption });
 
