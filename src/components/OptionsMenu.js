@@ -6,7 +6,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Switch from '@mui/material/Switch';
 import ConfirmationModal from './ConfirmationModal';
 
-const OptionsMenu = ({ options, optionsDispatch, autoDelete, autoDeleteDispatch }) => {
+const OptionsMenu = ({ hasOptions, optionsDispatch, autoDelete, autoDeleteDispatch }) => {
     const [anchorEl, setAnchorEl] = useState(null);
     const [showConfirmation, setShowConfimation] = useState(false);
 
@@ -30,6 +30,8 @@ const OptionsMenu = ({ options, optionsDispatch, autoDelete, autoDeleteDispatch 
         setShowConfimation(false);
     }, []);
 
+    console.log('options menu');
+
     return (
         <div>
             <IconButton
@@ -46,6 +48,7 @@ const OptionsMenu = ({ options, optionsDispatch, autoDelete, autoDeleteDispatch 
                 open={Boolean(anchorEl)}
                 onClose={handleCloseMenu}
                 keepMounted
+                getContentAnchorEl={null}
                 anchorOrigin={{
                     vertical: 'bottom',
                     horizontal: 'right',
@@ -65,7 +68,7 @@ const OptionsMenu = ({ options, optionsDispatch, autoDelete, autoDeleteDispatch 
                         inputProps={{ 'aria-label': 'auto-delete-switch' }}
                     />
                 </MenuItem>
-                <MenuItem className="menu-item" disabled={!options.length > 0} onClick={handleOpenConfirmation}>
+                <MenuItem className="menu-item" disabled={!hasOptions} onClick={handleOpenConfirmation}>
                     Delete All
                 </MenuItem>
             </Menu>
@@ -78,4 +81,4 @@ const OptionsMenu = ({ options, optionsDispatch, autoDelete, autoDeleteDispatch 
     );
 };
 
-export default OptionsMenu;
+export default React.memo(OptionsMenu);
