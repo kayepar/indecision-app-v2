@@ -1,4 +1,5 @@
 import React from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import useAutoScroll from '../hooks/useAutoScroll';
 import Option from './Option';
 import OptionsMenu from './OptionsMenu';
@@ -11,7 +12,7 @@ const Options = ({ options, optionsDispatch, autoDelete, autoDeleteDispatch }) =
             <div className="widget-header">
                 <h3 className="widget-header__title">Your Options</h3>
                 <OptionsMenu
-                    options={options}
+                    hasOptions={options.length > 0}
                     optionsDispatch={optionsDispatch}
                     autoDelete={autoDelete}
                     autoDeleteDispatch={autoDeleteDispatch}
@@ -23,7 +24,7 @@ const Options = ({ options, optionsDispatch, autoDelete, autoDeleteDispatch }) =
                     <Option
                         optionsDispatch={optionsDispatch}
                         data-testid="option-item"
-                        key={option}
+                        key={uuidv4()}
                         text={option}
                         index={index + 1}
                     />
