@@ -30,8 +30,6 @@ const OptionsMenu = ({ hasOptions, optionsDispatch, autoDelete, autoDeleteDispat
         setShowConfimation(false);
     }, []);
 
-    console.log('options menu');
-
     return (
         <div>
             <IconButton
