@@ -46,7 +46,6 @@ const OptionsMenu = ({ hasOptions, optionsDispatch, autoDelete, autoDeleteDispat
                 open={Boolean(anchorEl)}
                 onClose={handleCloseMenu}
                 keepMounted
-                getContentAnchorEl={null}
                 anchorOrigin={{
                     vertical: 'bottom',
                     horizontal: 'right',
