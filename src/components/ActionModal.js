@@ -28,4 +28,4 @@ const ActionModal = ({ optionsDispatch, pickedOption, updatePickedOption, autoDe
     );
 };
 
-export default ActionModal;
+export default React.memo(ActionModal);

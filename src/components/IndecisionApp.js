@@ -1,3 +1,5 @@
+import '../wdyr';
+
 import React, { useState, useReducer, useEffect } from 'react';
 import Header from './Header';
 import ActionButton from './ActionButton';
@@ -16,9 +18,9 @@ const IndecisionApp = () => {
     const [autoDeleteFromStorage, saveAutoDeleteToStorage] = useLocalStorage('autoDelete', false);
     const [autoDelete, autoDeleteDispatch] = useReducer(autoDeleteReducer, autoDeleteFromStorage);
 
-    const updatePickedOption = (option) => {
+    const updatePickedOption = React.useCallback((option) => {
         setPickedOption(option);
-    };
+    }, []);
 
     // save option to localstorage
     useEffect(() => {
@@ -29,6 +31,7 @@ const IndecisionApp = () => {
         saveAutoDeleteToStorage(autoDelete);
     }, [autoDelete]);
 
+    // todo: how about having another container that would house both action button and action modal. this would potentially prevent indecision app from reloading after an option is picked
     return (
         <>
             <Header />
@@ -52,5 +55,7 @@ const IndecisionApp = () => {
         </>
     );
 };
+
+IndecisionApp.whyDidYouRender = true;
 
 export default IndecisionApp;
