@@ -1,26 +1,20 @@
 import '../wdyr';
 
-import React, { useState, useReducer, useEffect } from 'react';
+import React, { useReducer, useEffect } from 'react';
 import Header from './Header';
-import ActionButton from './ActionButton';
-import ActionModal from './ActionModal';
 import Options from './Options';
 import AddForm from './AddForm';
+import ActionContainer from './ActionContainer';
 import optionsReducer from '../reducers/optionsReducer';
 import autoDeleteReducer from '../reducers/autoDeleteReducer';
 import useLocalStorage from '../hooks/useLocalStorage';
 
 const IndecisionApp = () => {
-    const [pickedOption, setPickedOption] = useState(undefined);
     const [optionsFromStorage, saveOptionsToStorage] = useLocalStorage('options', []);
     const [options, optionsDispatch] = useReducer(optionsReducer, optionsFromStorage);
 
     const [autoDeleteFromStorage, saveAutoDeleteToStorage] = useLocalStorage('autoDelete', false);
     const [autoDelete, autoDeleteDispatch] = useReducer(autoDeleteReducer, autoDeleteFromStorage);
-
-    const updatePickedOption = React.useCallback((option) => {
-        setPickedOption(option);
-    }, []);
 
     // save option to localstorage
     useEffect(() => {
@@ -31,12 +25,15 @@ const IndecisionApp = () => {
         saveAutoDeleteToStorage(autoDelete);
     }, [autoDelete]);
 
-    // todo: how about having another container that would house both action button and action modal. this would potentially prevent indecision app from reloading after an option is picked
     return (
         <>
             <Header />
             <div className="container container--content">
-                <ActionButton options={options} updatePickedOption={updatePickedOption} />
+                <ActionContainer
+                    options={options}
+                    optionsDispatch={optionsDispatch}
+                    autoDelete={autoDelete}
+                ></ActionContainer>
                 <Options
                     options={options}
                     optionsDispatch={optionsDispatch}
@@ -45,13 +42,6 @@ const IndecisionApp = () => {
                 />
                 <AddForm options={options} optionsDispatch={optionsDispatch} />
             </div>
-            <ActionModal
-                options={options}
-                optionsDispatch={optionsDispatch}
-                pickedOption={pickedOption}
-                updatePickedOption={updatePickedOption}
-                autoDelete={autoDelete}
-            />
         </>
     );
 };

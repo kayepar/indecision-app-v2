@@ -5,7 +5,7 @@ const ActionModal = ({ optionsDispatch, pickedOption, updatePickedOption, autoDe
     const handleCloseModal = () => {
         if (autoDelete) optionsDispatch({ type: 'DELETE_OPTION', option: pickedOption });
 
-        updatePickedOption(undefined);
+        updatePickedOption(-1);
     };
 
     return (
