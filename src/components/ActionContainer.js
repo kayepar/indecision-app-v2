@@ -15,7 +15,6 @@ const ActionContainer = ({ options, optionsDispatch, autoDelete }) => {
         <>
             <ActionButton optionsLength={options.length} updatePickedOption={updatePickedOption} />
             <ActionModal
-                options={options}
                 optionsDispatch={optionsDispatch}
                 pickedOption={pickedOption}
                 updatePickedOption={updatePickedOption}
