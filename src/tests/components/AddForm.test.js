@@ -1,7 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Modal from 'react-modal';
-import OptionsProvider from '../../context/optionsContext';
 import IndecisionApp from '../../components/IndecisionApp';
 
 beforeEach(() => {
@@ -11,11 +10,7 @@ beforeEach(() => {
 });
 
 const renderComponent = () => {
-    return render(
-        <OptionsProvider>
-            <IndecisionApp />
-        </OptionsProvider>
-    );
+    return render(<IndecisionApp />);
 };
 
 const addOption = (option) => {
