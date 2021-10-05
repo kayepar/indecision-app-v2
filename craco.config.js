@@ -1,5 +1,6 @@
 module.exports = {
     babel: {
+        presets: ['@babel/preset-react'],
         loaderOptions: (babelLoaderOptions) => {
             const origBabelPresetCRAIndex = babelLoaderOptions.presets.findIndex((preset) => {
                 return preset[0].includes('babel-preset-react-app');
