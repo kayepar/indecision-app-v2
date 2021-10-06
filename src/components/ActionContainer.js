@@ -5,21 +5,28 @@ import ActionModal from './ActionModal';
 const ActionContainer = ({ options, optionsDispatch, autoDelete }) => {
     const [pickedOption, setPickedOption] = useState(undefined);
 
-    const updatePickedOption = React.useCallback((optionNum) => {
-        const pickedOption = options[optionNum];
+    const handlePickOption = React.useCallback(() => {
+        const randomNumber = Math.floor(Math.random() * options.length);
+
+        const pickedOption = options[randomNumber];
 
         setPickedOption(pickedOption);
-    }, []);
+    }, [options]);
+
+    const handleClearPickedOption = React.useCallback(() => {
+        console.log(autoDelete);
+        if (autoDelete) optionsDispatch({ type: 'DELETE_OPTION', option: pickedOption });
+
+        setPickedOption(undefined);
+    }, [pickedOption]);
+
+    // note 1: not wrapping handleClearPickedOption in useCallback reloads ActionModal after every change in options (additions and deletions)
+    // note 2: not adding pickedOption as dependency on useCallback will cause autoDelete to not work (function will need to get re-created on value change)
 
     return (
         <>
-            <ActionButton optionsLength={options.length} updatePickedOption={updatePickedOption} />
-            <ActionModal
-                optionsDispatch={optionsDispatch}
-                pickedOption={pickedOption}
-                updatePickedOption={updatePickedOption}
-                autoDelete={autoDelete}
-            />
+            <ActionButton handlePickOption={handlePickOption} disabled={options.length < 1} />
+            <ActionModal pickedOption={pickedOption} handleClearPickedOption={handleClearPickedOption} />
         </>
     );
 };

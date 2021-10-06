@@ -1,19 +1,13 @@
 import React from 'react';
 import Modal from 'react-modal';
 
-const ActionModal = ({ optionsDispatch, pickedOption, updatePickedOption, autoDelete }) => {
-    const handleCloseModal = () => {
-        if (autoDelete) optionsDispatch({ type: 'DELETE_OPTION', option: pickedOption });
-
-        updatePickedOption(-1);
-    };
-
+const ActionModal = ({ pickedOption, handleClearPickedOption }) => {
     return (
         <Modal
             appElement={document.querySelector('#root')}
             isOpen={!!pickedOption}
             contentLabel="Selected Option"
-            onRequestClose={handleCloseModal}
+            onRequestClose={handleClearPickedOption}
             closeTimeoutMS={200}
             className="modal"
         >
@@ -21,11 +15,13 @@ const ActionModal = ({ optionsDispatch, pickedOption, updatePickedOption, autoDe
             <p className="modal__body" data-testid="picked-option">
                 {pickedOption}
             </p>
-            <button className="button" onClick={handleCloseModal}>
+            <button className="button" onClick={handleClearPickedOption}>
                 Okay
             </button>
         </Modal>
     );
 };
+
+ActionModal.whyDidYouRender = true;
 
 export default React.memo(ActionModal);
