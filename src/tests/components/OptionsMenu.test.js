@@ -1,7 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Modal from 'react-modal';
-import OptionsProvider from '../../context/optionsContext';
 import IndecisionApp from '../../components/IndecisionApp';
 
 beforeEach(() => {
@@ -11,11 +10,7 @@ beforeEach(() => {
 });
 
 const renderComponent = () => {
-    return render(
-        <OptionsProvider>
-            <IndecisionApp />
-        </OptionsProvider>
-    );
+    return render(<IndecisionApp />);
 };
 
 const addOption = (option) => {
@@ -40,7 +35,7 @@ describe('Tests for OptionsMenu component', () => {
             expect(deleteAllMenuItem).toHaveAttribute('aria-disabled', 'true');
         });
 
-        test(`With Options: If menu-icon is clicked, should render the component with 'Delete All' option enabled`, () => {
+        test.only(`With Options: If menu-icon is clicked, should render the component with 'Delete All' option enabled`, () => {
             addOption('Node.js');
 
             const optionsMenuButton = screen.getByRole('button', { name: 'options-menu' });
@@ -148,7 +143,7 @@ describe('Tests for OptionsMenu component', () => {
             expect(screen.getByText(/1. Node.js/i)).toBeInTheDocument();
         });
 
-        test('If auto-delete is on, should automatically delete selected option', () => {
+        test.only('If auto-delete is on, should automatically delete selected option', () => {
             // start: check that auto-delete is on
             const optionsMenuButton = screen.getByRole('button', { name: 'options-menu' });
 
@@ -186,6 +181,8 @@ describe('Tests for OptionsMenu component', () => {
 
             userEvent.click(okayButton);
             // end: pick an option
+
+            screen.debug();
 
             // check that the option no longer exists
             expect(screen.queryByText(/1. Node.js/i)).not.toBeInTheDocument();
