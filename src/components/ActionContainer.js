@@ -14,11 +14,10 @@ const ActionContainer = ({ options, optionsDispatch, autoDelete }) => {
     }, [options]);
 
     const handleClearPickedOption = React.useCallback(() => {
-        console.log(autoDelete);
         if (autoDelete) optionsDispatch({ type: 'DELETE_OPTION', option: pickedOption });
 
         setPickedOption(undefined);
-    }, [pickedOption]);
+    }, [pickedOption, autoDelete, optionsDispatch]);
 
     // note 1: not wrapping handleClearPickedOption in useCallback reloads ActionModal after every change in options (additions and deletions)
     // note 2: not adding pickedOption as dependency on useCallback will cause autoDelete to not work (function will need to get re-created on value change)
