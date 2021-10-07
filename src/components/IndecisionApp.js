@@ -23,7 +23,7 @@ const IndecisionApp = () => {
 
     useEffect(() => {
         saveAutoDeleteToStorage(autoDelete);
-    }, [autoDelete]);
+    }, [autoDelete, saveAutoDeleteToStorage]);
 
     return (
         <>
