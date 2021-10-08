@@ -1,5 +1,5 @@
 .widget {
-    margin: $ml-size 0;
+    margin: 0 0 $ml-size 0;
 }
 
 .widget__message {
@@ -10,14 +10,15 @@
 }
 
 .widget-header {
+    align-items: center;
     background: $primary-color;
     border-top-left-radius: $radius-size;
     border-top-right-radius: $radius-size;
     color: $accent-color;
     display: flex;
     justify-content: space-between;
+    margin: $ml-size 0 0 0;
     padding: $xs-size 0 $xs-size $m-size;
-    align-items: center;
 }
 
 .widget-header__title {
@@ -48,7 +49,11 @@
 
 @media (min-width: $desktop-breakpoint) {
     .widget {
-        margin: $xl-size 0;
+        margin: 0 0 $xl-size 0;
+    }
+
+    .widget-header {
+        margin: $xl-size 0 0 0;
     }
 
     .widget-content {
