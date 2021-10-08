@@ -2,6 +2,7 @@ import '../wdyr';
 
 import React, { useReducer, useEffect } from 'react';
 import Header from './Header';
+import OptionsHeader from './OptionsHeader';
 import Options from './Options';
 import AddForm from './AddForm';
 import ActionContainer from './ActionContainer';
@@ -34,12 +35,13 @@ const IndecisionApp = () => {
                     optionsDispatch={optionsDispatch}
                     autoDelete={autoDelete}
                 ></ActionContainer>
-                <Options
-                    options={options}
+                <OptionsHeader
+                    hasOptions={options.length > 0}
                     optionsDispatch={optionsDispatch}
                     autoDelete={autoDelete}
                     autoDeleteDispatch={autoDeleteDispatch}
                 />
+                <Options options={options} optionsDispatch={optionsDispatch} />
                 <AddForm options={options} optionsDispatch={optionsDispatch} />
             </div>
         </>
