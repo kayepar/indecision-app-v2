@@ -25,7 +25,7 @@
 }
 
 .widget-content {
-    max-height: 20.9rem;
+    max-height: 22rem;
     overflow-y: auto;
 
     &::-webkit-scrollbar {
@@ -52,6 +52,6 @@
     }
 
     .widget-content {
-        max-height: 20.7rem;
+        max-height: 20.9rem;
     }
 }

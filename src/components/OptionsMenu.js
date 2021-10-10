@@ -1,16 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import IconButton from '@material-ui/core/IconButton';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import MenuIcon from '@material-ui/icons/Menu';
-import Switch from '@material-ui/core/Switch';
+import React, { useState } from 'react';
+import IconButton from '@mui/material/IconButton';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import MenuIcon from '@mui/icons-material/Menu';
+import Switch from '@mui/material/Switch';
 import ConfirmationModal from './ConfirmationModal';
-import useLocalStorage from '../hooks/useLocalStorage';
 
-const OptionsMenu = (props) => {
+const OptionsMenu = ({ hasOptions, optionsDispatch, autoDelete, autoDeleteDispatch }) => {
     const [anchorEl, setAnchorEl] = useState(null);
-    const [autoDeleteFromStorage, saveAutoDeleteToStorage] = useLocalStorage('autoDelete', false);
-    const [autoDelete, setAutoDelete] = useState(autoDeleteFromStorage);
     const [showConfirmation, setShowConfimation] = useState(false);
 
     const handleOpenMenu = (e) => {
@@ -21,7 +18,7 @@ const OptionsMenu = (props) => {
     const handleCloseMenu = () => setAnchorEl(null);
 
     const handleAutoDeleteSwitch = () => {
-        setAutoDelete(!autoDelete);
+        autoDeleteDispatch({ type: 'SET_VALUE', value: !autoDelete });
     };
 
     const handleOpenConfirmation = () => {
@@ -29,13 +26,9 @@ const OptionsMenu = (props) => {
         setShowConfimation(true);
     };
 
-    const handleCloseConfirmation = () => {
+    const handleCloseConfirmation = React.useCallback(() => {
         setShowConfimation(false);
-    };
-
-    useEffect(() => {
-        saveAutoDeleteToStorage(autoDelete);
-    }, [autoDelete]);
+    }, []);
 
     return (
         <div>
@@ -53,7 +46,6 @@ const OptionsMenu = (props) => {
                 open={Boolean(anchorEl)}
                 onClose={handleCloseMenu}
                 keepMounted
-                getContentAnchorEl={null}
                 anchorOrigin={{
                     vertical: 'bottom',
                     horizontal: 'right',
@@ -73,13 +65,17 @@ const OptionsMenu = (props) => {
                         inputProps={{ 'aria-label': 'auto-delete-switch' }}
                     />
                 </MenuItem>
-                <MenuItem className="menu-item" disabled={!props.options.length > 0} onClick={handleOpenConfirmation}>
+                <MenuItem className="menu-item" disabled={!hasOptions} onClick={handleOpenConfirmation}>
                     Delete All
                 </MenuItem>
             </Menu>
-            <ConfirmationModal showConfirmation={showConfirmation} handleClose={handleCloseConfirmation} />
+            <ConfirmationModal
+                optionsDispatch={optionsDispatch}
+                showConfirmation={showConfirmation}
+                handleClose={handleCloseConfirmation}
+            />
         </div>
     );
 };
 
-export default OptionsMenu;
+export default React.memo(OptionsMenu);

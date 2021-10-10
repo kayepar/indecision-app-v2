@@ -1,21 +1,18 @@
 import React from 'react';
-import { useOptionsContext } from '../context/optionsContext';
-import IconButton from '@material-ui/core/IconButton';
-import DeleteOutlineRoundedIcon from '@material-ui/icons/DeleteOutlineRounded';
+import IconButton from '@mui/material/IconButton';
+import DeleteOutlineRoundedIcon from '@mui/icons-material/DeleteOutlineRounded';
 
-const Option = (props) => {
-    const { optionsDispatch } = useOptionsContext();
-
+const Option = ({ optionsDispatch, index, text }) => {
     const handleDeleteOption = (option) => {
         optionsDispatch({ type: 'DELETE_OPTION', option });
     };
 
     return (
         <div className="option" data-testid="option-item">
-            <p className="option__text">
-                {props.index}. {props.text}
+            <p className="option__text" data-testid="option-text">
+                {index}. {text}
             </p>
-            <IconButton aria-label="delete" onClick={() => handleDeleteOption(props.text)}>
+            <IconButton aria-label="delete" onClick={() => handleDeleteOption(text)}>
                 <DeleteOutlineRoundedIcon className="delete-icon" />
             </IconButton>
         </div>

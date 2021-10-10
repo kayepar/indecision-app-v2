@@ -1,17 +1,22 @@
-const useLocalStorage = (key, initialValue) => {
-    // uncomment this if the values need to be saved in the localstate too
-    // const [item, setItem] = React.useState(() => {
-    //     return localStorage.getItem(key) ? JSON.parse(localStorage.getItem(key)) : initialValue;
-    // });
+import { useEffect, useState } from 'react';
 
-    const item = localStorage.getItem(key) ? JSON.parse(localStorage.getItem(key)) : initialValue;
+const useLocalStorage = (key, initial) => {
+    const [value, setValue] = useState(() => {
+        if (typeof window !== 'undefined') {
+            const saved = window.localStorage.getItem(key);
+            if (saved !== null) {
+                return JSON.parse(saved);
+            }
+        }
 
-    const setValue = (value) => {
-        // setItem(value);
-        localStorage.setItem(key, JSON.stringify(value));
-    };
+        return initial;
+    });
 
-    return [item, setValue];
+    useEffect(() => {
+        window.localStorage.setItem(key, JSON.stringify(value));
+    }, [value]);
+
+    return [value, setValue];
 };
 
 export default useLocalStorage;

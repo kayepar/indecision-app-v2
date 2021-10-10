@@ -54,7 +54,7 @@ describe('Tests for OptionsMenu component', () => {
             expect(menu).toBeInTheDocument();
             expect(autoDeleteMenuItem).toBeInTheDocument();
             expect(deleteAllMenuItem).toBeInTheDocument();
-            expect(deleteAllMenuItem).toHaveAttribute('aria-disabled', 'false');
+            expect(deleteAllMenuItem).not.toHaveAttribute('aria-disabled');
         });
     });
 
@@ -70,7 +70,7 @@ describe('Tests for OptionsMenu component', () => {
 
             userEvent.keyboard('{escape}');
 
-            const menuContainer = menu.querySelector('div:nth-child(2)');
+            const menuContainer = menu.querySelector('div:nth-child(3)');
 
             expect(menuContainer).toHaveStyle('opacity: 0');
         });
@@ -81,11 +81,12 @@ describe('Tests for OptionsMenu component', () => {
             userEvent.click(optionsMenuButton);
 
             const menu = screen.getByRole('presentation', { id: 'options-menu' });
+
             const overlay = menu.querySelector('div:nth-child(1)');
 
             userEvent.click(overlay); // click outside of the menu
 
-            const menuContainer = menu.querySelector('div:nth-child(2)');
+            const menuContainer = menu.querySelector('div:nth-child(3)');
 
             expect(menuContainer).toHaveStyle('opacity: 0');
         });
@@ -122,7 +123,7 @@ describe('Tests for OptionsMenu component', () => {
 
             userEvent.click(overlay); // click outside of the menu to close it
 
-            const menuContainer = menu.querySelector('div:nth-child(2)');
+            const menuContainer = menu.querySelector('div:nth-child(3)');
 
             expect(menuContainer).toHaveStyle('opacity: 0'); // menu is closed
             // end: check that auto-delete is off
@@ -165,7 +166,7 @@ describe('Tests for OptionsMenu component', () => {
 
             userEvent.click(overlay); // click outside of the menu to close it
 
-            const menuContainer = menu.querySelector('div:nth-child(2)');
+            const menuContainer = menu.querySelector('div:nth-child(3)');
 
             expect(menuContainer).toHaveStyle('opacity: 0'); // menu is closed
             // end: check that auto-delete is on

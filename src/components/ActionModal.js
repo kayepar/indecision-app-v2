@@ -1,24 +1,17 @@
 import React from 'react';
 import Modal from 'react-modal';
-import { useOptionsContext } from '../context/optionsContext';
-import useLocalStorage from '../hooks/useLocalStorage';
 
-// Modal.setAppElement('#root');
-
-const ActionModal = (props) => {
-    const [autoDelete] = useLocalStorage('autoDelete');
-    const { optionsDispatch } = useOptionsContext();
-
+const ActionModal = ({ optionsDispatch, pickedOption, updatePickedOption, autoDelete }) => {
     const handleCloseModal = () => {
-        if (autoDelete) optionsDispatch({ type: 'DELETE_OPTION', option: props.pickedOption });
+        if (autoDelete) optionsDispatch({ type: 'DELETE_OPTION', option: pickedOption });
 
-        props.updatePickedOption(undefined);
+        updatePickedOption(undefined);
     };
 
     return (
         <Modal
             appElement={document.querySelector('#root')}
-            isOpen={!!props.pickedOption}
+            isOpen={!!pickedOption}
             contentLabel="Selected Option"
             onRequestClose={handleCloseModal}
             closeTimeoutMS={200}
@@ -26,7 +19,7 @@ const ActionModal = (props) => {
         >
             <h3 className="modal__title">Selected Option</h3>
             <p className="modal__body" data-testid="picked-option">
-                {props.pickedOption}
+                {pickedOption}
             </p>
             <button className="button" onClick={handleCloseModal}>
                 Okay
@@ -35,4 +28,4 @@ const ActionModal = (props) => {
     );
 };
 
-export default ActionModal;
+export default React.memo(ActionModal);
