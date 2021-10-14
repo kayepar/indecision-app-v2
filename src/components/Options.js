@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import useAutoScroll from '../hooks/useAutoScroll';
 import Option from './Option';
@@ -24,4 +24,4 @@ const Options = ({ options, optionsDispatch }) => {
     );
 };
 
-export default React.memo(Options);
+export default memo(Options);

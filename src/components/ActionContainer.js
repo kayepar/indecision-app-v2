@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import ActionButton from './ActionButton';
 import ActionModal from './ActionModal';
 
 const ActionContainer = ({ options, optionsDispatch, autoDelete }) => {
     const [pickedOption, setPickedOption] = useState(undefined);
 
-    const handlePickOption = React.useCallback(() => {
+    const handlePickOption = useCallback(() => {
         const randomNumber = Math.floor(Math.random() * options.length);
 
         const pickedOption = options[randomNumber];
@@ -13,7 +13,7 @@ const ActionContainer = ({ options, optionsDispatch, autoDelete }) => {
         setPickedOption(pickedOption);
     }, [options]);
 
-    const handleClearPickedOption = React.useCallback(() => {
+    const handleClearPickedOption = useCallback(() => {
         if (autoDelete) optionsDispatch({ type: 'DELETE_OPTION', option: pickedOption });
 
         setPickedOption(undefined);
@@ -29,7 +29,5 @@ const ActionContainer = ({ options, optionsDispatch, autoDelete }) => {
         </>
     );
 };
-
-// ActionContainer.whyDidYouRender = true;
 
 export default ActionContainer;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import Modal from 'react-modal';
 
 const ActionModal = ({ pickedOption, handleClearPickedOption }) => {
@@ -22,6 +22,6 @@ const ActionModal = ({ pickedOption, handleClearPickedOption }) => {
     );
 };
 
-ActionModal.whyDidYouRender = true;
+// ActionModal.whyDidYouRender = true;
 
-export default React.memo(ActionModal);
+export default memo(ActionModal);

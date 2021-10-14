@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, memo, useCallback } from 'react';
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
@@ -26,7 +26,7 @@ const OptionsMenu = ({ hasOptions, optionsDispatch, autoDelete, autoDeleteDispat
         setShowConfimation(true);
     };
 
-    const handleCloseConfirmation = React.useCallback(() => {
+    const handleCloseConfirmation = useCallback(() => {
         setShowConfimation(false);
     }, []);
 
@@ -78,4 +78,4 @@ const OptionsMenu = ({ hasOptions, optionsDispatch, autoDelete, autoDeleteDispat
     );
 };
 
-export default React.memo(OptionsMenu);
+export default memo(OptionsMenu);

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import Modal from 'react-modal';
 
 // Modal.setAppElement('#root');
@@ -30,4 +30,4 @@ const ConfirmationModal = ({ optionsDispatch, showConfirmation, handleClose }) =
     );
 };
 
-export default React.memo(ConfirmationModal);
+export default memo(ConfirmationModal);

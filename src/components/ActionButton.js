@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 const ActionButton = ({ disabled, handlePickOption }) => {
     return (
@@ -12,4 +12,4 @@ const ActionButton = ({ disabled, handlePickOption }) => {
 
 ActionButton.whyDidYouRender = true;
 
-export default React.memo(ActionButton);
+export default memo(ActionButton);

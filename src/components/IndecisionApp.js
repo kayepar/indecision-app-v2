@@ -48,6 +48,6 @@ const IndecisionApp = () => {
     );
 };
 
-IndecisionApp.whyDidYouRender = true;
+// IndecisionApp.whyDidYouRender = true;
 
 export default IndecisionApp;
