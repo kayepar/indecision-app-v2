@@ -35,6 +35,8 @@ const IndecisionApp = () => {
                     optionsDispatch={optionsDispatch}
                     autoDelete={autoDelete}
                 ></ActionContainer>
+                <AddForm options={options} optionsDispatch={optionsDispatch} />
+
                 <OptionsHeader
                     hasOptions={options.length > 0}
                     optionsDispatch={optionsDispatch}
@@ -42,7 +44,6 @@ const IndecisionApp = () => {
                     autoDeleteDispatch={autoDeleteDispatch}
                 />
                 <Options options={options} optionsDispatch={optionsDispatch} />
-                <AddForm options={options} optionsDispatch={optionsDispatch} />
             </div>
         </>
     );
