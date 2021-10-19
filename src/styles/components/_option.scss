@@ -1,6 +1,13 @@
 .option {
-    border: 1px solid lighten($primary-color, 50%);
-    border-top: none;
+    border: 2px solid $light-grey;
+    // border-top: none;
+    border-left: none;
+    border-right: none;
+    border-radius: $radius-size;
+    border-bottom-left-radius: $radius-size;
+    border-bottom-right-radius: $radius-size;
+
+    background-color: $white;
     display: flex;
     justify-content: space-between;
     padding: $ml-size $m-size;

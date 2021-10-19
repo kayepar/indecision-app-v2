@@ -12,22 +12,23 @@
 .widget-header {
     align-items: center;
     background: $primary-color;
-    border-top-left-radius: $radius-size;
-    border-top-right-radius: $radius-size;
-    color: $accent-color;
+    // border-top-left-radius: $radius-size;
+    // border-top-right-radius: $radius-size;
+    color: $white;
     display: flex;
     justify-content: space-between;
-    margin: $ml-size 0 0 0;
+    margin: $m-size 0 0 0;
     padding: $xs-size 0 $xs-size $m-size;
 }
 
 .widget-header__title {
+    font-size: $font-size-xs;
     margin: 0;
 }
 
 .widget-content {
     max-height: 22rem;
-    overflow-y: auto;
+    // overflow-y: auto;
 
     &::-webkit-scrollbar {
         /* width of the entire scrollbar */

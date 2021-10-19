@@ -1,7 +1,7 @@
 .header {
     background: $primary-color;
     color: $white;
-    padding: $ml-size 0;
+    padding: $m-size 0;
 }
 
 .header__title {
@@ -11,7 +11,7 @@
 
 .header__subtitle {
     color: $secondary-color;
-    font-size: $m-size;
+    font-size: $font-size-xs;
     font-weight: 400;
     margin: 0;
 }

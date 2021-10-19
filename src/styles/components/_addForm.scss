@@ -1,7 +1,7 @@
 .add-option-container {
-    background: $primary-color;
-    border-radius: $radius-size;
-    padding: $ml-size $m-size;
+    // background: $primary-color;
+    // border-radius: $radius-size;
+    padding-top: $ml-size;
 }
 
 .add-option-error {
@@ -20,7 +20,8 @@
 
 .add-option__input {
     background: $white;
-    border: none;
+    border: 1px solid #888;
+
     flex-grow: 1;
     padding: $s-size;
     margin: 0 0 $m-size 0;
