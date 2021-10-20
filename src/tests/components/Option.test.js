@@ -27,7 +27,7 @@ describe('Tests for Option component', () => {
         const option = screen.getByTestId('option-item');
         const deleteButton = within(option).getByRole('button', { name: 'delete' });
 
-        expect(option.textContent).toEqual(`1. ${optionText}`);
+        expect(option.textContent).toEqual(optionText);
         expect(deleteButton).toBeInTheDocument();
     });
 
@@ -39,13 +39,13 @@ describe('Tests for Option component', () => {
         const options = screen.getAllByTestId('option-item');
 
         expect(options).toHaveLength(2);
-        expect(options[1].textContent).toEqual(`2. ${optionText}`);
+        expect(options[1].textContent).toEqual(optionText);
 
         const deleteButton = within(options[1]).getByRole('button', { name: 'delete' });
 
         userEvent.click(deleteButton);
 
         expect(screen.getAllByTestId('option-item')).toHaveLength(1);
-        expect(options[0].textContent).not.toEqual(`2. ${optionText}`);
+        expect(options[0].textContent).not.toEqual(optionText);
     });
 });

@@ -140,7 +140,7 @@ describe('Tests for OptionsMenu component', () => {
             // end: pick an option
 
             // check that the option still exists
-            expect(screen.getByText(/1. Node.js/i)).toBeInTheDocument();
+            expect(screen.getByText(/Node.js/i)).toBeInTheDocument();
         });
 
         test('If auto-delete is on, should automatically delete selected option', () => {

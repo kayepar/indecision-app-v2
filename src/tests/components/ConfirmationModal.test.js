@@ -98,7 +98,7 @@ describe('Tests for ConfirmationModal component', () => {
             expect(screen.queryByRole('dialog', { name: 'Confirm your request' })).not.toBeInTheDocument();
         });
 
-        expect(screen.getByText(/1. Javascript/i)).toBeInTheDocument(); // option added from test case 1
+        expect(screen.getByText(/Javascript/i)).toBeInTheDocument(); // option added from test case 1
     });
 
     test('If delete button is clicked, should delete option(s)', async () => {

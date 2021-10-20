@@ -55,7 +55,7 @@ describe('Tests for AddForm component', () => {
 
             expect(addOptionTextbox.value).toEqual('');
             expect(screen.queryByText(/Enter a valid option/i)).not.toBeInTheDocument();
-            expect(screen.getByText(/1. React JS/i)).toBeInTheDocument();
+            expect(screen.getByText(/React JS/i)).toBeInTheDocument();
         });
 
         test('If valid option is entered after an error, should clear error message and add option', () => {
@@ -69,7 +69,7 @@ describe('Tests for AddForm component', () => {
 
             expect(addOptionTextbox.value).toBe('');
             expect(screen.queryByText(/Enter a valid option/i)).not.toBeInTheDocument();
-            expect(screen.getByText(/2. HTML5/i)).toBeInTheDocument();
+            expect(screen.getByText(/HTML5/i)).toBeInTheDocument();
         });
 
         test('Should submit form on enter key', () => {
@@ -79,7 +79,7 @@ describe('Tests for AddForm component', () => {
 
             expect(addOptionTextbox.value).toBe('');
             expect(screen.queryByText(/Enter a valid option/i)).not.toBeInTheDocument();
-            expect(screen.getByText(/3. JAVA/i)).toBeInTheDocument();
+            expect(screen.getByText(/JAVA/i)).toBeInTheDocument();
         });
     });
 
@@ -97,7 +97,7 @@ describe('Tests for AddForm component', () => {
             addOption(optionText);
 
             expect(addOptionTextbox.value).toEqual(optionText);
-            expect(screen.getByText(/This option already exists \(#1\)/i)).toBeInTheDocument();
+            expect(screen.getByText(/This option already exists/i)).toBeInTheDocument();
             expect(screen.getAllByText(new RegExp(optionText, 'i'))).toHaveLength(1);
         });
     });
