@@ -11,13 +11,7 @@ const Options = ({ options, optionsDispatch }) => {
             <div className="widget-content" ref={optionsContainerRef} data-testid="options-container">
                 {options.length === 0 && <p className="widget__message">Please add an option to get started</p>}
                 {options.map((option, index) => (
-                    <Option
-                        optionsDispatch={optionsDispatch}
-                        data-testid="option-item"
-                        key={uuidv4()}
-                        text={option}
-                        index={index + 1}
-                    />
+                    <Option optionsDispatch={optionsDispatch} data-testid="option-item" key={uuidv4()} text={option} />
                 ))}
             </div>
         </div>
