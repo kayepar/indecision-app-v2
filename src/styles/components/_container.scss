@@ -6,10 +6,12 @@
 
 .container--content {
     padding: $ml-size $m-size;
+    display: flex;
+    flex-direction: column;
 }
 
 @media (min-width: $desktop-breakpoint) {
     .container--content {
-        padding: $xl-size $m-size;
+        padding: $l-size $m-size;
     }
 }

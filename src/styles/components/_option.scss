@@ -6,15 +6,14 @@
     border-radius: $radius-size;
     border-bottom-left-radius: $radius-size;
     border-bottom-right-radius: $radius-size;
-
     background-color: $white;
     display: flex;
     justify-content: space-between;
-    padding: $ml-size $m-size;
+    padding: 1.9rem $m-size;
 }
 
 .option__text {
-    font-size: 1.8rem;
+    font-size: 1.7rem;
     font-weight: 400;
     margin: 0;
     word-break: break-word;
@@ -25,3 +24,7 @@
     color: $secondary-color;
     font-size: $font-size-small !important;
 }
+
+// todo! container-content - need to adjust the height for when the scrollbar displays
+// todo! add the pagination
+// todo! remove auto-scroll and numbering

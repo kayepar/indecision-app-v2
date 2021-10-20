@@ -12,8 +12,8 @@
 .widget-header {
     align-items: center;
     background: $primary-color;
-    // border-top-left-radius: $radius-size;
-    // border-top-right-radius: $radius-size;
+    border-top-left-radius: $radius-size;
+    border-top-right-radius: $radius-size;
     color: $white;
     display: flex;
     justify-content: space-between;
@@ -54,7 +54,7 @@
     }
 
     .widget-header {
-        margin: $xl-size 0 0 0;
+        margin: $l-size 0 0 0;
     }
 
     .widget-content {
