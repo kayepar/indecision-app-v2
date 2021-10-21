@@ -24,7 +24,7 @@ const AddForm = ({ options, optionsDispatch }) => {
         if (!option) {
             error = 'Enter a valid option';
         } else if (ifOptionExists(option)) {
-            error = `This option already exists (#${getOptionIndex(option)})`;
+            error = `This option already exists`;
         }
 
         return error;
@@ -34,9 +34,9 @@ const AddForm = ({ options, optionsDispatch }) => {
         return options.indexOf(option) > -1;
     };
 
-    const getOptionIndex = (option) => {
-        return options.findIndex((item) => item === option) + 1;
-    };
+    // const getOptionIndex = (option) => {
+    //     return options.findIndex((item) => item === option) + 1;
+    // };
 
     return (
         <div className="add-option-container">
