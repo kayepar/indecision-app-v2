@@ -1,6 +1,7 @@
 import '../wdyr';
 
-import React, { useReducer, useEffect } from 'react';
+import React, { useReducer, useEffect, useState, useRef } from 'react';
+import Pagination from '@mui/material/Pagination';
 import Header from './Header';
 import OptionsHeader from './OptionsHeader';
 import Options from './Options';
@@ -17,6 +18,17 @@ const IndecisionApp = () => {
     const [autoDeleteFromStorage, saveAutoDeleteToStorage] = useLocalStorage('autoDelete', false);
     const [autoDelete, autoDeleteDispatch] = useReducer(autoDeleteReducer, autoDeleteFromStorage);
 
+    const [page, setPage] = useState(1);
+    const [optionsToDisplay, setOptionsToDisplay] = useState([]);
+    const displayPerPage = 5;
+
+    const optionsOnDisplayLength = useRef(0);
+    const numPages = Math.ceil(options.length / displayPerPage);
+
+    const handlePageOnChange = (e, pageNum) => {
+        setPage(pageNum);
+    };
+
     // save option to localstorage
     useEffect(() => {
         saveOptionsToStorage(options);
@@ -25,6 +37,20 @@ const IndecisionApp = () => {
     useEffect(() => {
         saveAutoDeleteToStorage(autoDelete);
     }, [autoDelete, saveAutoDeleteToStorage]);
+
+    useEffect(() => {
+        const end = page * displayPerPage;
+        const start = end - displayPerPage;
+        const optionsPartitioned = options.slice(start, end);
+
+        setOptionsToDisplay(optionsPartitioned);
+        optionsOnDisplayLength.current = optionsPartitioned.length;
+
+        if (page !== 1 && optionsOnDisplayLength.current === 0) {
+            // jump to prev page if the current page has no notes left (all were deleted)
+            setPage(page - 1);
+        }
+    }, [page, options, setOptionsToDisplay]);
 
     return (
         <>
@@ -43,7 +69,17 @@ const IndecisionApp = () => {
                     autoDelete={autoDelete}
                     autoDeleteDispatch={autoDeleteDispatch}
                 />
-                <Options options={options} optionsDispatch={optionsDispatch} />
+                <Options options={optionsToDisplay} optionsDispatch={optionsDispatch} />
+                <div className="pagination">
+                    <Pagination
+                        count={numPages}
+                        onChange={handlePageOnChange}
+                        page={page}
+                        variant="outlined"
+                        shape="rounded"
+                        size="medium"
+                    />
+                </div>
             </div>
         </>
     );
