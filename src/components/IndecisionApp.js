@@ -1,6 +1,10 @@
 import '../wdyr';
 
 import React, { useReducer, useEffect, useState, useRef } from 'react';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
 import Pagination from '@mui/material/Pagination';
 import Header from './Header';
 import OptionsHeader from './OptionsHeader';
@@ -20,14 +24,10 @@ const IndecisionApp = () => {
 
     const [page, setPage] = useState(1);
     const [optionsToDisplay, setOptionsToDisplay] = useState([]);
-    const displayPerPage = 5;
+    const [displayPerPage, setDisplayPerPage] = useState(5);
 
     const optionsOnDisplayLength = useRef(0);
     const numPages = Math.ceil(options.length / displayPerPage);
-
-    const handlePageOnChange = (e, pageNum) => {
-        setPage(pageNum);
-    };
 
     // save option to localstorage
     useEffect(() => {
@@ -50,7 +50,15 @@ const IndecisionApp = () => {
             // jump to prev page if the current page has no notes left (all were deleted)
             setPage(page - 1);
         }
-    }, [page, options, setOptionsToDisplay]);
+    }, [page, options, displayPerPage, setOptionsToDisplay]);
+
+    const handlePageOnChange = (e, pageNum) => {
+        setPage(pageNum);
+    };
+
+    const handleRowsOnChange = (e) => {
+        setDisplayPerPage(e.target.value);
+    };
 
     return (
         <>
@@ -71,6 +79,19 @@ const IndecisionApp = () => {
                 />
                 <Options options={optionsToDisplay} optionsDispatch={optionsDispatch} />
                 <div className="pagination">
+                    <FormControl>
+                        <InputLabel>Rows</InputLabel>
+                        <Select
+                            id="demo-simple-select-helper"
+                            value={displayPerPage}
+                            label="Rows per Page"
+                            onChange={handleRowsOnChange}
+                        >
+                            <MenuItem value={5}>5</MenuItem>
+                            <MenuItem value={10}>10</MenuItem>
+                            <MenuItem value={20}>20</MenuItem>
+                        </Select>
+                    </FormControl>
                     <Pagination
                         count={numPages}
                         onChange={handlePageOnChange}
