@@ -12,6 +12,6 @@
 
 @media (min-width: $desktop-breakpoint) {
     .container--content {
-        padding: $l-size $m-size;
+        padding: $l-size $m-size $l-size $xs-size;
     }
 }

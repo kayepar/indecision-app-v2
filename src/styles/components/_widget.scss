@@ -1,6 +1,7 @@
-.widget {
-    margin: 0 0 $ml-size 0;
-}
+// .widget {
+//     // margin: 0 0 $ml-size 0;
+//     // position: relative;
+// }
 
 .widget__message {
     border: 1px solid lighten($primary-color, 50%);
@@ -18,7 +19,7 @@
     display: flex;
     justify-content: space-between;
     margin: $m-size 0 0 0;
-    padding: $xs-size 0 $xs-size $m-size;
+    padding: 0.1rem 0 0.1rem $m-size;
 }
 
 .widget-header__title {
@@ -27,7 +28,7 @@
 }
 
 .widget-content {
-    max-height: 22rem;
+    max-height: 100%;
     // overflow-y: auto;
 
     &::-webkit-scrollbar {
@@ -50,7 +51,7 @@
 
 @media (min-width: $desktop-breakpoint) {
     .widget {
-        margin: 0 0 $xl-size 0;
+        // margin: 0 0 $xl-size 0;
     }
 
     .widget-header {
@@ -58,6 +59,6 @@
     }
 
     .widget-content {
-        max-height: 20.9rem;
+        max-height: 100%;
     }
 }
