@@ -78,28 +78,28 @@ const IndecisionApp = () => {
                     autoDeleteDispatch={autoDeleteDispatch}
                 />
                 <Options options={optionsToDisplay} optionsDispatch={optionsDispatch} />
-                <div className="pagination">
-                    <FormControl>
-                        <InputLabel>Rows</InputLabel>
-                        <Select
-                            id="demo-simple-select-helper"
-                            value={displayPerPage}
-                            label="Rows per Page"
-                            onChange={handleRowsOnChange}
-                        >
-                            <MenuItem value={5}>5</MenuItem>
-                            <MenuItem value={10}>10</MenuItem>
-                            <MenuItem value={20}>20</MenuItem>
-                        </Select>
-                    </FormControl>
-                    <Pagination
-                        count={numPages}
-                        onChange={handlePageOnChange}
-                        page={page}
-                        variant="outlined"
-                        shape="rounded"
-                        size="medium"
-                    />
+                <div className="options-footer">
+                    <div className="tally">
+                        {options.length} {options.length !== 1 ? 'options' : 'option'}
+                    </div>
+                    <div className="pagination-container">
+                        <FormControl>
+                            <Select id="demo-simple-select-helper" value={displayPerPage} onChange={handleRowsOnChange}>
+                                <MenuItem value={5}>5</MenuItem>
+                                <MenuItem value={10}>10</MenuItem>
+                                <MenuItem value={20}>20</MenuItem>
+                            </Select>
+                        </FormControl>
+                        <Pagination
+                            count={numPages}
+                            onChange={handlePageOnChange}
+                            page={page}
+                            variant="outlined"
+                            shape="rounded"
+                            size="medium"
+                            className="pagination"
+                        />
+                    </div>
                 </div>
             </div>
         </>
