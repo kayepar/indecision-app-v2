@@ -13,6 +13,7 @@ body {
     font-family: $raleway-font;
     font-size: $m-size;
     color: $dark-grey;
+    overflow: hidden;
 
     &::-webkit-scrollbar {
         /* width of the entire scrollbar */

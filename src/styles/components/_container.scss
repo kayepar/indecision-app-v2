@@ -1,3 +1,29 @@
+.body {
+    max-width: 100%;
+    max-height: 630px;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+        /* width of the entire scrollbar */
+        width: 1.2rem;
+    }
+
+    &::-webkit-scrollbar-track {
+        /* color of the tracking area */
+        background: $off-white;
+        border-bottom-right-radius: $radius-size;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        /* color of the scroll thumb */
+        background-color: $secondary-color;
+        /* roundness of the scroll thumb */
+        border-bottom-right-radius: $radius-size;
+        /* creates padding around scroll thumb */
+        border: 3px solid $secondary-color;
+    }
+}
+
 .container {
     margin: 0 auto;
     max-width: 55rem;
@@ -11,6 +37,12 @@
 }
 
 @media (min-width: $desktop-breakpoint) {
+    .body {
+        max-width: 100%;
+        max-height: 630px;
+        overflow-y: auto;
+    }
+
     .container--content {
         padding: $l-size $m-size $l-size $xs-size;
     }
