@@ -1,11 +1,25 @@
-.pagination {
+.options-footer {
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
-    margin: $m-size 0 $xs-size 0;
 }
 
-// todo: both rows and paging should be on the right
+.tally {
+    font-size: $font-size-xxs;
+    margin: $m-size 0 $xs-size 0;
+    padding-left: $m-size;
+    padding-top: $xs-size;
+}
+
+.pagination-container {
+    display: flex;
+    flex-direction: row;
+    margin: $m-size $m-size $xs-size 0;
+}
+
+.pagination {
+    padding-left: $m-size;
+}
+
 // todo: check font size
 // todo: scrollbar on content - keep header sticky
 
