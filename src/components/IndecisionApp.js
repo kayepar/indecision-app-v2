@@ -1,10 +1,7 @@
 import '../wdyr';
 
 import React, { useReducer, useEffect, useState, useRef } from 'react';
-import FormControl from '@mui/material/FormControl';
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
-import Pagination from '@mui/material/Pagination';
+import { TablePagination } from '@mui/material';
 import Header from './Header';
 import OptionsHeader from './OptionsHeader';
 import Options from './Options';
@@ -15,22 +12,22 @@ import autoDeleteReducer from '../reducers/autoDeleteReducer';
 import useLocalStorage from '../hooks/useLocalStorage';
 
 // todo: add tests for paging and tally
-// todo: check on mobile
-// todo: trim size of pagination especially on mobile
+// todo: see if reducer is better in handling paging states
+// todo: see if pagination section can be a separate component
 
 const IndecisionApp = () => {
+    const defaultNumRows = 5;
     const [optionsFromStorage, saveOptionsToStorage] = useLocalStorage('options', []);
     const [options, optionsDispatch] = useReducer(optionsReducer, optionsFromStorage);
 
     const [autoDeleteFromStorage, saveAutoDeleteToStorage] = useLocalStorage('autoDelete', false);
     const [autoDelete, autoDeleteDispatch] = useReducer(autoDeleteReducer, autoDeleteFromStorage);
 
-    const [page, setPage] = useState(1);
+    const [page, setPage] = useState(0);
     const [optionsToDisplay, setOptionsToDisplay] = useState([]);
-    const [displayPerPage, setDisplayPerPage] = useState(5);
+    const [displayPerPage, setDisplayPerPage] = useState(defaultNumRows);
 
     const optionsOnDisplayLength = useRef(0);
-    const numPages = Math.ceil(options.length / displayPerPage);
 
     // save option to localstorage
     useEffect(() => {
@@ -42,16 +39,17 @@ const IndecisionApp = () => {
     }, [autoDelete, saveAutoDeleteToStorage]);
 
     useEffect(() => {
-        const end = page * displayPerPage;
+        const actualPage = page + 1;
+        const end = actualPage * displayPerPage;
         const start = end - displayPerPage;
         const optionsPartitioned = options.slice(start, end);
 
         setOptionsToDisplay(optionsPartitioned);
         optionsOnDisplayLength.current = optionsPartitioned.length;
 
-        if (page !== 1 && optionsOnDisplayLength.current === 0) {
+        if (page !== 0 && optionsOnDisplayLength.current === 0) {
             // jump to prev page if the current page has no notes left (all were deleted)
-            setPage(page - 1);
+            setPage([page] - 1);
         }
     }, [page, options, displayPerPage, setOptionsToDisplay]);
 
@@ -83,31 +81,24 @@ const IndecisionApp = () => {
                     />
                     <Options options={optionsToDisplay} optionsDispatch={optionsDispatch} />
                     <div className="options-footer">
-                        <div className="tally">
-                            {options.length} {options.length !== 1 ? 'options' : 'option'}
-                        </div>
-                        <div className="pagination-container">
-                            <FormControl>
-                                <Select
-                                    id="demo-simple-select-helper"
-                                    value={displayPerPage}
-                                    onChange={handleRowsOnChange}
-                                >
-                                    <MenuItem value={5}>5</MenuItem>
-                                    <MenuItem value={10}>10</MenuItem>
-                                    <MenuItem value={20}>20</MenuItem>
-                                </Select>
-                            </FormControl>
-                            <Pagination
-                                count={numPages}
-                                onChange={handlePageOnChange}
+                        {options.length > 0 && (
+                            <div className="tally">
+                                {options.length} {options.length !== 1 ? 'options' : 'option'}
+                            </div>
+                        )}
+                        {options.length > defaultNumRows && (
+                            <TablePagination
+                                className="tablePagination"
+                                component="div"
+                                count={options.length}
                                 page={page}
-                                variant="outlined"
-                                shape="rounded"
-                                size="medium"
-                                className="pagination"
+                                labelRowsPerPage={''}
+                                onPageChange={handlePageOnChange}
+                                rowsPerPage={displayPerPage}
+                                onRowsPerPageChange={handleRowsOnChange}
+                                rowsPerPageOptions={[5, 10, 20]}
                             />
-                        </div>
+                        )}
                     </div>
                 </div>
             </div>
