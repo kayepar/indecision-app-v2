@@ -1,12 +1,12 @@
 import '../wdyr';
 
 import React, { useReducer, useEffect, useState, useRef } from 'react';
-import { TablePagination } from '@mui/material';
 import Header from './Header';
 import OptionsHeader from './OptionsHeader';
 import Options from './Options';
 import AddForm from './AddForm';
 import ActionContainer from './ActionContainer';
+import OptionsFooter from './OptionsFooter';
 import optionsReducer from '../reducers/optionsReducer';
 import autoDeleteReducer from '../reducers/autoDeleteReducer';
 import useLocalStorage from '../hooks/useLocalStorage';
@@ -81,24 +81,14 @@ const IndecisionApp = () => {
                     />
                     <Options options={optionsToDisplay} optionsDispatch={optionsDispatch} />
                     <div className="options-footer">
-                        {options.length > 0 && (
-                            <div className="tally">
-                                {options.length} {options.length !== 1 ? 'options' : 'option'}
-                            </div>
-                        )}
-                        {options.length > defaultNumRows && (
-                            <TablePagination
-                                className="tablePagination"
-                                component="div"
-                                count={options.length}
-                                page={page}
-                                labelRowsPerPage={''}
-                                onPageChange={handlePageOnChange}
-                                rowsPerPage={displayPerPage}
-                                onRowsPerPageChange={handleRowsOnChange}
-                                rowsPerPageOptions={[5, 10, 20]}
-                            />
-                        )}
+                        <OptionsFooter
+                            optionsLength={options.length}
+                            page={page}
+                            defaultNumRows={defaultNumRows}
+                            displayPerPage={displayPerPage}
+                            handleRowsOnChange={handleRowsOnChange}
+                            handlePageOnChange={handlePageOnChange}
+                        />
                     </div>
                 </div>
             </div>
