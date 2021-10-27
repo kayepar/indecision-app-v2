@@ -1,28 +1,22 @@
 .options-footer {
     display: flex;
+    align-items: center;
     justify-content: space-between;
 }
 
 .tally {
     font-size: $font-size-xxs;
-    margin: $m-size 0 $xs-size 0;
-    padding-left: $m-size;
-    padding-top: $xs-size;
+    margin-left: $m-size;
+    height: 100%;
 }
 
-.pagination-container {
-    display: flex;
-    flex-direction: row;
-    margin: $m-size $m-size $xs-size 0;
+.tablePagination {
+    margin-right: $m-size;
 }
 
-.pagination {
-    padding-left: $m-size;
-}
-
-// todo: check font size
-// todo: scrollbar on content - keep header sticky
-
-.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
-    padding: 8px 30px 9px 10px !important;
+.css-16c50h-MuiInputBase-root-MuiTablePagination-select,
+.css-10by3a5-MuiButtonBase-root-MuiMenuItem-root-MuiTablePagination-menuItem,
+.css-levciy-MuiTablePagination-displayedRows {
+    font-size: $font-size-xxs !important;
+    font-family: $raleway-font !important;
 }
