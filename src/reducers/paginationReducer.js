@@ -3,8 +3,8 @@ const paginationReducer = (state, action) => {
         case 'SET_PAGE':
             return { ...state, page: action.page };
 
-        case 'SET_DISPLAY':
-            return { ...state, display: action.display };
+        case 'SET_ROWS_PER_PAGE':
+            return { ...state, rowsPerPage: action.rows };
         default:
             throw new Error('Cannot handle action');
     }

@@ -13,15 +13,12 @@ import paginationReducer from '../reducers/paginationReducer';
 import useLocalStorage from '../hooks/useLocalStorage';
 
 // todo: add tests for paging and tally
-// todo: see if reducer is better in handling paging states
-// todo: fix displayperpage property in reducer
 // todo: pass dispatch and rename setPagination in line 33 -> move actionHandlers to optionfooter component
 
 const IndecisionApp = () => {
-    // const defaultNumRows = 5;
-    const defaultPagination = {
+    const defaultPaginationValues = {
         page: 0,
-        display: 5,
+        rowsPerPage: 5,
     };
     const [optionsFromStorage, saveOptionsToStorage] = useLocalStorage('options', []);
     const [options, optionsDispatch] = useReducer(optionsReducer, optionsFromStorage);
@@ -29,12 +26,8 @@ const IndecisionApp = () => {
     const [autoDeleteFromStorage, saveAutoDeleteToStorage] = useLocalStorage('autoDelete', false);
     const [autoDelete, autoDeleteDispatch] = useReducer(autoDeleteReducer, autoDeleteFromStorage);
 
+    const [pagination, paginationDispatch] = useReducer(paginationReducer, defaultPaginationValues);
     const [optionsToDisplay, setOptionsToDisplay] = useState([]);
-
-    // const [page, setPage] = useState(0);
-    // const [displayPerPage, setDisplayPerPage] = useState(defaultNumRows);
-
-    const [pagination, setPagination] = useReducer(paginationReducer, defaultPagination);
 
     const optionsOnDisplayLength = useRef(0);
 
@@ -48,8 +41,8 @@ const IndecisionApp = () => {
 
     useEffect(() => {
         const actualPage = pagination.page + 1;
-        const end = actualPage * pagination.display;
-        const start = end - pagination.display;
+        const end = actualPage * pagination.rowsPerPage;
+        const start = end - pagination.rowsPerPage;
         const optionsPartitioned = options.slice(start, end);
 
         setOptionsToDisplay(optionsPartitioned);
@@ -57,19 +50,16 @@ const IndecisionApp = () => {
 
         if (pagination.page !== 0 && optionsOnDisplayLength.current === 0) {
             // jump to prev page if the current page has no notes left (all were deleted)
-            // setPage(page - 1);
-            setPagination({ type: 'SET_PAGE', page: pagination.page - 1 });
+            paginationDispatch({ type: 'SET_PAGE', page: pagination.page - 1 });
         }
-    }, [pagination.page, options, pagination.display, setOptionsToDisplay]);
+    }, [pagination.page, options, pagination.rowsPerPage, setOptionsToDisplay]);
 
     const handlePageOnChange = (e, pageNum) => {
-        // setPage(pageNum);
-        setPagination({ type: 'SET_PAGE', page: pageNum });
+        paginationDispatch({ type: 'SET_PAGE', page: pageNum });
     };
 
     const handleRowsOnChange = (e) => {
-        // setDisplayPerPage(e.target.value);
-        setPagination({ type: 'SET_DISPLAY', display: e.target.value });
+        paginationDispatch({ type: 'SET_ROWS_PER_PAGE', rowsPerPage: e.target.value });
     };
 
     return (
@@ -95,8 +85,8 @@ const IndecisionApp = () => {
                         <OptionsFooter
                             optionsLength={options.length}
                             page={pagination.page}
-                            defaultNumRows={defaultPagination.display}
-                            displayPerPage={pagination.display}
+                            defaultNumRows={defaultPaginationValues.rowsPerPage}
+                            displayPerPage={pagination.rowsPerPage}
                             handleRowsOnChange={handleRowsOnChange}
                             handlePageOnChange={handlePageOnChange}
                         />
