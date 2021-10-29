@@ -13,7 +13,6 @@ import paginationReducer from '../reducers/paginationReducer';
 import useLocalStorage from '../hooks/useLocalStorage';
 
 // todo: add tests for paging and tally
-// todo: pass dispatch and rename setPagination in line 33 -> move actionHandlers to optionfooter component
 
 const IndecisionApp = () => {
     const defaultPaginationValues = {
@@ -54,14 +53,6 @@ const IndecisionApp = () => {
         }
     }, [pagination.page, options, pagination.rowsPerPage, setOptionsToDisplay]);
 
-    const handlePageOnChange = (e, pageNum) => {
-        paginationDispatch({ type: 'SET_PAGE', page: pageNum });
-    };
-
-    const handleRowsOnChange = (e) => {
-        paginationDispatch({ type: 'SET_ROWS_PER_PAGE', rowsPerPage: e.target.value });
-    };
-
     return (
         <>
             <Header />
@@ -87,8 +78,7 @@ const IndecisionApp = () => {
                             page={pagination.page}
                             defaultNumRows={defaultPaginationValues.rowsPerPage}
                             displayPerPage={pagination.rowsPerPage}
-                            handleRowsOnChange={handleRowsOnChange}
-                            handlePageOnChange={handlePageOnChange}
+                            paginationDispatch={paginationDispatch}
                         />
                     </div>
                 </div>
