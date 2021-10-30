@@ -19,6 +19,7 @@ const OptionsFooter = ({ optionsLength, page, defaultNumRows, displayPerPage, pa
             )}
             {optionsLength > defaultNumRows && (
                 <TablePagination
+                    data-testid="pagination"
                     className="tablePagination"
                     component="div"
                     count={optionsLength}
