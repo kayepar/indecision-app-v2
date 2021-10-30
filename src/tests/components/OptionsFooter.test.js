@@ -1,5 +1,4 @@
-import { ExploreOff } from '@mui/icons-material';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, within, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Modal from 'react-modal';
 import IndecisionApp from '../../components/IndecisionApp';
@@ -21,13 +20,13 @@ const addOption = (option) => {
 
 describe('Tests for the OptionsFooter component', () => {
     describe('Tests for the total/tally details', () => {
-        test('Should not render the total if there are no options', () => {
+        test('If there are no options yet, should not render total', () => {
             const totalElement = screen.queryByTestId('total-options');
 
             expect(totalElement).not.toBeInTheDocument();
         });
 
-        test('Should correctly render if there is an option', () => {
+        test('If there is an option, should correctly render in singular form', () => {
             addOption('Javascript');
 
             const totalElement = screen.getByTestId('total-options');
@@ -36,7 +35,7 @@ describe('Tests for the OptionsFooter component', () => {
             expect(totalElement).toHaveTextContent('1 option');
         });
 
-        test('Should correctly display in plural form if more than one option', () => {
+        test('If there are more options, should correctly display in plural form', () => {
             addOption('HTML5');
 
             const totalElement = screen.getByTestId('total-options');
@@ -44,9 +43,22 @@ describe('Tests for the OptionsFooter component', () => {
             expect(totalElement).toBeInTheDocument();
             expect(totalElement).toHaveTextContent('2 options');
         });
+
+        test('If an option is deleted, should correctly decrement total', () => {
+            const options = screen.getAllByTestId('option-item');
+
+            const deleteButton = within(options[1]).getByRole('button', { name: 'delete' });
+
+            userEvent.click(deleteButton);
+
+            const totalElement = screen.getByTestId('total-options');
+
+            expect(totalElement).toBeInTheDocument();
+            expect(totalElement).toHaveTextContent('1 option');
+        });
     });
 
-    // should decrement if option is deleted
+    describe('Tests for rows per page dropdown', () => {});
     // rows per page - not displayed if options not greater than 5
     // paging - not showing if options not greater than 5 -> should have 5, 10, 20 as options
     // should be hidden if option falls less than 5 --> delete some
