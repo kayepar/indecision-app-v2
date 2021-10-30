@@ -58,9 +58,47 @@ describe('Tests for the OptionsFooter component', () => {
         });
     });
 
-    describe('Tests for rows per page dropdown', () => {});
-    // rows per page - not displayed if options not greater than 5
-    // paging - not showing if options not greater than 5 -> should have 5, 10, 20 as options
+    describe('Tests for rows per page dropdown', () => {
+        test('If options are less than 5, should display dropdown', () => {
+            const pagination = screen.queryByTestId('pagination');
+
+            expect(pagination).not.toBeInTheDocument();
+        });
+
+        test('If options are more than 5, should display dropdown', () => {
+            const testOptions = ['CSS', 'HTML5', 'React.js', 'Node.js', 'MongoDB'];
+
+            testOptions.forEach((option) => addOption(option));
+
+            const pagination = screen.queryByTestId('pagination');
+            const display5rows = within(pagination).getByRole('button', { name: '5' });
+
+            expect(pagination).toBeInTheDocument();
+
+            // within(pagination).getByRole('');
+
+            expect(display5rows).toBeInTheDocument();
+        });
+
+        test('Dropdown should show 5, 10, and 20 as options', () => {
+            const pagination = screen.getByTestId('pagination');
+            const display5rows = within(pagination).getByRole('button', { name: '5' });
+
+            expect(pagination).toBeInTheDocument();
+
+            userEvent.click(display5rows);
+
+            screen.debug(undefined, 20000);
+
+            // find popup and form within, check the options
+
+            // within(pagination).getByRole('');
+
+            // expect(display5rows).toBeInTheDocument();
+        });
+    });
+    // rows per page - not displayed if options not greater than 5 --> -> should have 5, 10, 20 as options
+    // paging - not showing if options not greater than 5
     // should be hidden if option falls less than 5 --> delete some
     // should display more options if selected rows is 10 or 20
     // should display next set of options if arrow forward is clicked
