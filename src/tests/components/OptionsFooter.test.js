@@ -58,50 +58,60 @@ describe('Tests for the OptionsFooter component', () => {
         });
     });
 
-    describe('Tests for rows per page dropdown', () => {
-        test('If options are less than 5, should display dropdown', () => {
-            const pagination = screen.queryByTestId('pagination');
+    describe('Test for pagination component', () => {
+        test('If options are less than 5, should not display dropdown', () => {
+            const display5rows = screen.queryByRole('button', { name: '5' });
 
-            expect(pagination).not.toBeInTheDocument();
+            expect(display5rows).not.toBeInTheDocument();
         });
 
+        test('If options are less than 5, should not display paging', () => {
+            const prevButton = screen.queryByRole('button', { name: 'Go to previous page' });
+            const nextButton = screen.queryByRole('button', { name: 'Go to next page' });
+
+            expect(prevButton).not.toBeInTheDocument();
+            expect(nextButton).not.toBeInTheDocument();
+        });
+    });
+
+    describe('Tests for rows per page dropdown', () => {
         test('If options are more than 5, should display dropdown', () => {
             const testOptions = ['CSS', 'HTML5', 'React.js', 'Node.js', 'MongoDB'];
 
             testOptions.forEach((option) => addOption(option));
 
-            const pagination = screen.queryByTestId('pagination');
-            const display5rows = within(pagination).getByRole('button', { name: '5' });
-
-            expect(pagination).toBeInTheDocument();
-
-            // within(pagination).getByRole('');
+            const display5rows = screen.getByRole('button', { name: '5' });
 
             expect(display5rows).toBeInTheDocument();
         });
 
         test('Dropdown should show 5, 10, and 20 as options', () => {
-            const pagination = screen.getByTestId('pagination');
-            const display5rows = within(pagination).getByRole('button', { name: '5' });
-
-            expect(pagination).toBeInTheDocument();
+            const display5rows = screen.getByRole('button', { name: '5' });
 
             userEvent.click(display5rows);
 
-            screen.debug(undefined, 20000);
-
-            // find popup and form within, check the options
-
-            // within(pagination).getByRole('');
-
-            // expect(display5rows).toBeInTheDocument();
+            expect(screen.getByRole('option', { name: '5' })).toBeInTheDocument();
+            expect(screen.getByRole('option', { name: '10' })).toBeInTheDocument();
+            expect(screen.getByRole('option', { name: '20' })).toBeInTheDocument();
         });
     });
-    // rows per page - not displayed if options not greater than 5 --> -> should have 5, 10, 20 as options
+
+    describe('Tests for paging', () => {
+        test('If options are more than 5, should display paging', () => {
+            const prevButton = screen.getByRole('button', { name: 'Go to previous page' });
+            const nextButton = screen.getByRole('button', { name: 'Go to next page' });
+
+            expect(prevButton).toBeInTheDocument();
+            expect(nextButton).toBeInTheDocument();
+
+            // check the text for the pages
+        });
+    });
+
+    // todo: fix rowsperppage error
     // paging - not showing if options not greater than 5
     // should be hidden if option falls less than 5 --> delete some
     // should display more options if selected rows is 10 or 20
     // should display next set of options if arrow forward is clicked
-    // should display
     // addOption in a loop
 });
