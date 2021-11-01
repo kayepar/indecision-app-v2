@@ -78,6 +78,7 @@ describe('Tests for the OptionsFooter component', () => {
         test('If options are more than 5, should display dropdown', () => {
             const testOptions = ['CSS', 'HTML5', 'React.js', 'Node.js', 'MongoDB'];
 
+            // will make 5 more options --> 6 in total
             testOptions.forEach((option) => addOption(option));
 
             const display5rows = screen.getByRole('button', { name: '5' });
@@ -94,6 +95,8 @@ describe('Tests for the OptionsFooter component', () => {
             expect(screen.getByRole('option', { name: '10' })).toBeInTheDocument();
             expect(screen.getByRole('option', { name: '20' })).toBeInTheDocument();
         });
+
+        // Change to 10, all should be displayed - count options...
     });
 
     describe('Tests for paging', () => {
@@ -104,12 +107,14 @@ describe('Tests for the OptionsFooter component', () => {
             expect(prevButton).toBeInTheDocument();
             expect(nextButton).toBeInTheDocument();
 
-            // check the text for the pages
+            const pagination = screen.getByTestId('pagination');
+            const displayedRows = pagination.querySelectorAll('p')[1].innerHTML;
+
+            expect(displayedRows).toEqual('1-5 of 6');
         });
     });
 
-    // todo: fix rowsperppage error
-    // paging - not showing if options not greater than 5
+    // move next --> display should change as well as displayed rows
     // should be hidden if option falls less than 5 --> delete some
     // should display more options if selected rows is 10 or 20
     // should display next set of options if arrow forward is clicked
