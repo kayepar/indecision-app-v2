@@ -97,6 +97,26 @@ describe('Tests for the OptionsFooter component', () => {
         });
 
         // Change to 10, all should be displayed - count options...
+
+        // test('If selected number is changed, number of rows should be reflected in options list', () => {
+        //     const display5rows = screen.getByRole('button', { name: '5' });
+
+        //     userEvent.click(display5rows);
+
+        //     const display10rows = screen.getByRole('option', { name: '10' });
+
+        //     // userEvent.selectOptions(display10rows);
+
+        //     userEvent.selectOptions(
+        //         // Find the select element
+        //         screen.getByRole('option'),
+        //         // Find and select the Ireland option
+        //         // screen.getByRole('option', { name: '10' })
+        //         display10rows
+        //     );
+
+        //     // screen.debug(undefined, 20000);
+        // });
     });
 
     describe('Tests for paging', () => {
@@ -112,11 +132,45 @@ describe('Tests for the OptionsFooter component', () => {
 
             expect(displayedRows).toEqual('1-5 of 6');
         });
+
+        test('If next button is clicked, should display options on second page', () => {
+            const nextButton = screen.getByRole('button', { name: 'Go to next page' });
+
+            userEvent.click(nextButton);
+
+            const pagination = screen.getByTestId('pagination');
+            const displayedRows = pagination.querySelectorAll('p')[1].innerHTML;
+
+            expect(displayedRows).toEqual('6-6 of 6');
+
+            const options_container = screen.getByTestId('options-container');
+            const option_items = within(options_container).getAllByTestId('option-item');
+
+            // should only display the sixth option
+            expect(option_items).toHaveLength(1);
+        });
+
+        test('If previous button is clicked, should display options on first page', async () => {
+            // screen.getByRole('');
+            const nextButton = screen.getByRole('button', { name: 'Go to next page' });
+            userEvent.click(nextButton);
+
+            const prevButton = screen.getByRole('button', { name: 'Go to previous page' });
+            userEvent.click(prevButton);
+
+            const pagination = screen.getByTestId('pagination');
+            const displayedRows = pagination.querySelectorAll('p')[1].innerHTML;
+
+            expect(displayedRows).toEqual('1-5 of 6');
+
+            const options_container = screen.getByTestId('options-container');
+            const option_items = within(options_container).getAllByTestId('option-item');
+
+            // should display 5 options again
+            expect(option_items).toHaveLength(5);
+        });
     });
 
-    // move next --> display should change as well as displayed rows
     // should be hidden if option falls less than 5 --> delete some
     // should display more options if selected rows is 10 or 20
-    // should display next set of options if arrow forward is clicked
-    // addOption in a loop
 });
