@@ -1,4 +1,4 @@
-import { render, screen, within, waitFor } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Modal from 'react-modal';
 import IndecisionApp from '../../components/IndecisionApp';
@@ -58,7 +58,8 @@ describe('Tests for the OptionsFooter component', () => {
         });
     });
 
-    describe('Test for pagination component', () => {
+    describe('Test for pagination component pt.1', () => {
+        // tests before more options are added
         test('If options are less than 5, should not display dropdown', () => {
             const display5rows = screen.queryByRole('button', { name: '5' });
 
@@ -96,27 +97,23 @@ describe('Tests for the OptionsFooter component', () => {
             expect(screen.getByRole('option', { name: '20' })).toBeInTheDocument();
         });
 
-        // Change to 10, all should be displayed - count options...
+        test('If selected number is changed, number of rows should be reflected in options list', () => {
+            const options_container = screen.getByTestId('options-container');
 
-        // test('If selected number is changed, number of rows should be reflected in options list', () => {
-        //     const display5rows = screen.getByRole('button', { name: '5' });
+            // should display 5 options since it's the default
+            expect(within(options_container).getAllByTestId('option-item')).toHaveLength(5);
 
-        //     userEvent.click(display5rows);
+            const display5rows = screen.getByRole('button', { name: '5' });
 
-        //     const display10rows = screen.getByRole('option', { name: '10' });
+            userEvent.click(display5rows); // this will display select options
 
-        //     // userEvent.selectOptions(display10rows);
+            const display10rows = screen.getByRole('option', { name: '10' });
 
-        //     userEvent.selectOptions(
-        //         // Find the select element
-        //         screen.getByRole('option'),
-        //         // Find and select the Ireland option
-        //         // screen.getByRole('option', { name: '10' })
-        //         display10rows
-        //     );
+            userEvent.click(display10rows); // change rows to display to 10
 
-        //     // screen.debug(undefined, 20000);
-        // });
+            // should display all options
+            expect(within(options_container).getAllByTestId('option-item')).toHaveLength(6);
+        });
     });
 
     describe('Tests for paging', () => {
@@ -151,7 +148,6 @@ describe('Tests for the OptionsFooter component', () => {
         });
 
         test('If previous button is clicked, should display options on first page', async () => {
-            // screen.getByRole('');
             const nextButton = screen.getByRole('button', { name: 'Go to next page' });
             userEvent.click(nextButton);
 
@@ -169,8 +165,38 @@ describe('Tests for the OptionsFooter component', () => {
             // should display 5 options again
             expect(option_items).toHaveLength(5);
         });
+
+        test('If selected number of rows is changed, display on paging should also be updated', () => {
+            const display5rows = screen.getByRole('button', { name: '5' });
+
+            userEvent.click(display5rows); // this will display select options
+
+            const display10rows = screen.getByRole('option', { name: '10' });
+
+            userEvent.click(display10rows);
+
+            const pagination = screen.getByTestId('pagination');
+            const displayedRows = pagination.querySelectorAll('p')[1].innerHTML;
+
+            expect(displayedRows).toEqual('1-6 of 6');
+        });
     });
 
-    // should be hidden if option falls less than 5 --> delete some
-    // should display more options if selected rows is 10 or 20
+    describe('Test for pagination component pt.2', () => {
+        // tests after deleting an option, making the count exactly 5
+
+        test('If the options fall below 5, pagination should be hidden again', () => {
+            const options = screen.getAllByTestId('option-item');
+
+            const deleteButton = within(options[1]).getByRole('button', { name: 'delete' });
+
+            userEvent.click(deleteButton); // delete 1st option
+
+            expect(options).toHaveLength(5);
+
+            const pagination = screen.queryByTestId('pagination');
+
+            expect(pagination).not.toBeInTheDocument();
+        });
+    });
 });
