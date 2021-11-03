@@ -12,8 +12,6 @@ import autoDeleteReducer from '../reducers/autoDeleteReducer';
 import paginationReducer from '../reducers/paginationReducer';
 import useLocalStorage from '../hooks/useLocalStorage';
 
-// todo: add tests for paging and tally
-
 const IndecisionApp = () => {
     const defaultPaginationValues = {
         page: 0,
