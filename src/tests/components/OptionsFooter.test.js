@@ -58,8 +58,7 @@ describe('Tests for the OptionsFooter component', () => {
         });
     });
 
-    describe('Test for pagination component pt.1', () => {
-        // tests before more options are added
+    describe('Test for pagination component', () => {
         test('If options are less than 5, should not display dropdown', () => {
             const display5rows = screen.queryByRole('button', { name: '5' });
 
@@ -180,23 +179,32 @@ describe('Tests for the OptionsFooter component', () => {
 
             expect(displayedRows).toEqual('1-6 of 6');
         });
-    });
 
-    describe('Test for pagination component pt.2', () => {
-        // tests after deleting an option, making the count exactly 5
+        test('If last option on page is deleted, display should move to prev page', () => {
+            const testOptions = ['Java', 'XML', 'MySQL', 'Jest', 'Firebase'];
+            // will make 5 more options --> 11 in total
+            testOptions.forEach((option) => addOption(option));
 
-        test('If the options fall below 5, pagination should be hidden again', () => {
-            const options = screen.getAllByTestId('option-item');
+            const pagination = screen.getByTestId('pagination');
+            const nextButton = screen.getByRole('button', { name: 'Go to next page' });
 
-            const deleteButton = within(options[1]).getByRole('button', { name: 'delete' });
+            userEvent.click(nextButton); // move to 2nd page
+            userEvent.click(nextButton); // move to 3rd page
 
-            userEvent.click(deleteButton); // delete 1st option
+            expect(pagination.querySelectorAll('p')[1].innerHTML).toEqual('11-11 of 11');
 
-            expect(options).toHaveLength(5);
+            const options_container = screen.getByTestId('options-container');
+            const option_items = within(options_container).getAllByTestId('option-item');
 
-            const pagination = screen.queryByTestId('pagination');
+            expect(option_items).toHaveLength(1); // only one option on page 3
 
-            expect(pagination).not.toBeInTheDocument();
+            const deleteButton = within(option_items[0]).getByRole('button', { name: 'delete' });
+
+            userEvent.click(deleteButton); // delete the option
+
+            // page 2's options are displayed
+            expect(within(options_container).getAllByTestId('option-item')).toHaveLength(5);
+            expect(pagination.querySelectorAll('p')[1].innerHTML).toEqual('6-10 of 10');
         });
     });
 });
