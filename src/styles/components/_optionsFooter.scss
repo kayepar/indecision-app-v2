@@ -14,9 +14,13 @@
     margin-right: $m-size;
 }
 
-.css-16c50h-MuiInputBase-root-MuiTablePagination-select,
-.css-10by3a5-MuiButtonBase-root-MuiMenuItem-root-MuiTablePagination-menuItem,
-.css-levciy-MuiTablePagination-displayedRows {
+.MuiTablePagination-displayedRows,
+.MuiTablePagination-select,
+.MuiTablePagination-menuItem {
     font-size: $font-size-xxs !important;
     font-family: $raleway-font !important;
+}
+
+.MuiTablePagination-select {
+    padding-top: 8px !important;
 }
