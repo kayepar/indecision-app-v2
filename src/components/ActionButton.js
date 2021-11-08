@@ -10,6 +10,6 @@ const ActionButton = ({ disabled, handlePickOption }) => {
     );
 };
 
-ActionButton.whyDidYouRender = true;
+// ActionButton.whyDidYouRender = true;
 
 export default memo(ActionButton);
