@@ -1,19 +1,19 @@
 ## Table of Contents
 
-- [Indecision App](#indecision-app)
-  - [Getting Started](#getting-started)
-    - [Installation](#installation)
-  - [Running the tests](#running-the-tests)
-  - [Design Considerations](#design-considerations)
-  - [Built With](#built-with)
-  - [Acknowledgements](#acknowledgements)
-  - [Contact](#contact)
+-   [Indecision App](#indecision-app)
+    -   [Getting Started](#getting-started)
+        -   [Installation](#installation)
+    -   [Running the tests](#running-the-tests)
+    -   [Design Considerations](#design-considerations)
+    -   [Built With](#built-with)
+    -   [Acknowledgements](#acknowledgements)
+    -   [Contact](#contact)
 
 # Indecision App
 
 A simple app that will randomly pick a choice for you based on the options that you've provided.
 
-This was built with [React v17](https://reactjs.org/) (create-react-app) and [MUI](https://mui.com/).
+Built with [React v17](https://reactjs.org/) (create-react-app) and [MUI](https://mui.com/).
 
 **URL:** https://par-indecision-app-v2.herokuapp.com/
 
