@@ -74,7 +74,7 @@ Follow below steps to setup the project on your local machine.
 
 ## Design Considerations
 
-While working on the app, I wanted to learn more about how rendering works and how to optimize the code in such a way that there were no needless re-rendering of components. I've read quite a few articles on best practices and utilities and one of the tricks that I've picked up was a tool called [WDYR](https://github.com/welldone-software/why-did-you-render) (Why did you render). WDYR notifies you why a component is rendered therefore giving you a clue on how you could potentially avoid a re-render if it is unnecessary.
+While working on the app, I wanted to learn more about how rendering works and how to optimize the code in such a way that there were no needless re-rendering of components. I've read quite a few articles on best practices and utilities and one of the tricks that I've picked up was a tool called [WDYR](https://github.com/welldone-software/why-did-you-render) (Why Did You Render). WDYR notifies you why a component is rendered therefore giving you a clue on how you could potentially avoid a re-render if it is unnecessary.
 
 WDYR is active in development only and for it to work properly, I had to use [CRACO](https://github.com/gsoft-inc/craco) and modify some of Babel's config. So instead of seeing the usual `react-scripts start` in package.json, the app uses the script `craco start` instead.
 
