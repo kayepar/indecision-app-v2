@@ -4,6 +4,7 @@ import React, { useReducer, useEffect, useState, useRef } from 'react';
 import Header from './Header';
 import OptionsHeader from './OptionsHeader';
 import Options from './Options';
+import OptionsMenu from './OptionsMenu';
 import AddForm from './AddForm';
 import ActionContainer from './ActionContainer';
 import OptionsFooter from './OptionsFooter';
@@ -62,13 +63,14 @@ const IndecisionApp = () => {
                         autoDelete={autoDelete}
                     ></ActionContainer>
                     <AddForm options={options} optionsDispatch={optionsDispatch} />
-
-                    <OptionsHeader
-                        hasOptions={options.length > 0}
-                        optionsDispatch={optionsDispatch}
-                        autoDelete={autoDelete}
-                        autoDeleteDispatch={autoDeleteDispatch}
-                    />
+                    <OptionsHeader>
+                        <OptionsMenu
+                            hasOptions={options.length > 0}
+                            optionsDispatch={optionsDispatch}
+                            autoDelete={autoDelete}
+                            autoDeleteDispatch={autoDeleteDispatch}
+                        />
+                    </OptionsHeader>
                     <Options options={optionsToDisplay} optionsDispatch={optionsDispatch} />
                     <div className="options-footer">
                         <OptionsFooter
