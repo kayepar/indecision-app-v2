@@ -1,6 +1,6 @@
 import '../wdyr';
 
-import React, { useReducer, useEffect, useState, useRef } from 'react';
+import React, { useReducer, useEffect } from 'react';
 import Header from './Header';
 import OptionsHeader from './OptionsHeader';
 import Options from './Options';
@@ -10,24 +10,22 @@ import ActionContainer from './ActionContainer';
 import OptionsFooter from './OptionsFooter';
 import optionsReducer from '../reducers/optionsReducer';
 import autoDeleteReducer from '../reducers/autoDeleteReducer';
-import paginationReducer from '../reducers/paginationReducer';
 import useLocalStorage from '../hooks/useLocalStorage';
+import usePagination from '../hooks/usePagination';
 
 const IndecisionApp = () => {
-    const defaultPaginationValues = {
-        page: 0,
-        rowsPerPage: 5,
-    };
     const [optionsFromStorage, saveOptionsToStorage] = useLocalStorage('options', []);
     const [options, optionsDispatch] = useReducer(optionsReducer, optionsFromStorage);
 
     const [autoDeleteFromStorage, saveAutoDeleteToStorage] = useLocalStorage('autoDelete', false);
     const [autoDelete, autoDeleteDispatch] = useReducer(autoDeleteReducer, autoDeleteFromStorage);
 
-    const [pagination, paginationDispatch] = useReducer(paginationReducer, defaultPaginationValues);
-    const [optionsToDisplay, setOptionsToDisplay] = useState([]);
+    const defaultPaginationValues = {
+        page: 0,
+        rowsPerPage: 5,
+    };
 
-    const optionsOnDisplayLength = useRef(0);
+    const [optionsToDisplay, pagination, paginationDispatch] = usePagination(options, defaultPaginationValues);
 
     useEffect(() => {
         saveOptionsToStorage(options);
@@ -36,21 +34,6 @@ const IndecisionApp = () => {
     useEffect(() => {
         saveAutoDeleteToStorage(autoDelete);
     }, [autoDelete, saveAutoDeleteToStorage]);
-
-    useEffect(() => {
-        const actualPage = pagination.page + 1;
-        const end = actualPage * pagination.rowsPerPage;
-        const start = end - pagination.rowsPerPage;
-        const optionsPartitioned = options.slice(start, end);
-
-        setOptionsToDisplay(optionsPartitioned);
-        optionsOnDisplayLength.current = optionsPartitioned.length;
-
-        if (pagination.page !== 0 && optionsOnDisplayLength.current === 0) {
-            // jump to prev page if the current page has no notes left (all were deleted)
-            paginationDispatch({ type: 'SET_PAGE', page: pagination.page - 1 });
-        }
-    }, [pagination.page, options, pagination.rowsPerPage, setOptionsToDisplay]);
 
     return (
         <>
@@ -86,7 +69,5 @@ const IndecisionApp = () => {
         </>
     );
 };
-
-// IndecisionApp.whyDidYouRender = true;
 
 export default IndecisionApp;
