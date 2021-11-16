@@ -1,21 +1,34 @@
 ## Table of Contents
 
--   [Indecision App](#indecision-app)
-    -   [Getting Started](#getting-started)
-        -   [Installation](#installation)
-    -   [Running the tests](#running-the-tests)
-    -   [Design Considerations](#design-considerations)
-    -   [Built With](#built-with)
-    -   [Acknowledgements](#acknowledgements)
-    -   [Contact](#contact)
+- [Indecision App](#indecision-app)
+  - [Getting Started](#getting-started)
+    - [Installation](#installation)
+  - [Running the tests](#running-the-tests)
+  - [Design Considerations](#design-considerations)
+  - [Built With](#built-with)
+  - [Acknowledgements](#acknowledgements)
+  - [Contact](#contact)
 
 # Indecision App
 
 A simple app that will randomly pick a choice for you based on the options that you've provided.
 
-Built with [React v17](https://reactjs.org/) (create-react-app) and [MUI](https://mui.com/).
+Built with [React v17](https://reactjs.org/) (create-react-app) and [MUI](https://mui.com/). For data persistence, options are saved in localStorage.
 
 **URL:** https://par-indecision-app-v2.herokuapp.com/
+
+<div style="padding-bottom:10px">
+    <img src="src/assets/indecision-screenshot-desktop-1.jpg" width="850px" style=";border: 1px solid #2b2b28;"></img> 
+</div>
+<div style="padding-bottom:10px">
+    <img src="src/assets/indecision-screenshot-desktop-2.jpg" width="850px" style=";border: 1px solid #2b2b28;"></img> 
+</div>
+<div style="padding-bottom:10px">
+    <img src="src/assets/indecision-screenshot-desktop-3.jpg" width="850px" style=";border: 1px solid #2b2b28;"></img> 
+</div>
+<div>
+  <img src="src/assets/indecision-screenshot-mobile.jpg" width="850px" style=";border: 1px solid #2b2b28;"></img> 
+</div>
 
 ## Getting Started
 
@@ -74,7 +87,7 @@ Follow below steps to setup the project on your local machine.
 
 ## Design Considerations
 
-While working on the app, I wanted to learn more about how rendering works and how to optimize the code in such a way that there were no needless re-rendering of components. I've read quite a few articles on best practices and utilities and one of the tricks that I've picked up was a tool called [WDYR](https://github.com/welldone-software/why-did-you-render) (Why Did You Render). WDYR notifies you why a component is rendered therefore giving you a clue on how you could potentially avoid a re-render if it is unnecessary.
+While working on the app, I wanted to learn more about how rendering works and how to optimize the code in such a way that there were no needless re-rendering of components. I've read quite a few articles on best practices and utilities and one of the tricks that I've picked up on was a tool called [WDYR](https://github.com/welldone-software/why-did-you-render) (Why Did You Render). WDYR notifies you why a component is rendered therefore giving you a clue on how you could potentially avoid a re-render if it is unnecessary.
 
 WDYR is active in development only and for it to work properly, I had to use [CRACO](https://github.com/gsoft-inc/craco) and modify some of Babel's config. So instead of seeing the usual `react-scripts start` in package.json, the app uses the script `craco start` instead.
 
@@ -95,6 +108,7 @@ I then switched to `useState` and `useReducer`. I find the combination of these 
 -   [Heroku](https://www.heroku.com/)
 -   [Why Did You Render](https://github.com/welldone-software/why-did-you-render)
 -   [CRACO](https://github.com/gsoft-inc/craco)
+-   [Freepik](https://www.freepik.com/)
 
 ## Contact
 
