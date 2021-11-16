@@ -5,13 +5,23 @@
 }
 
 .header__title {
-    font-size: $font-size-xlarge;
+    font-size: $font-size-large;
     margin: 0;
 }
 
 .header__subtitle {
     color: $secondary-color;
-    font-size: $font-size-xs;
+    font-size: $font-size-xxs;
     font-weight: 400;
     margin: 0;
+}
+
+@media (min-width: $desktop-breakpoint) {
+    .header__title {
+        font-size: $font-size-xlarge;
+    }
+
+    .header__subtitle {
+        font-size: $font-size-xs;
+    }
 }
