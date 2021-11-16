@@ -9,7 +9,8 @@ html {
 }
 
 body {
-    background: $light-grey;
+    background: url('../../assets/background.jpg') no-repeat center fixed;
+    background-size: cover;
     font-family: $raleway-font;
     font-size: $m-size;
     color: $dark-grey;
